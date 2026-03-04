@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://dp7fdpacyvlah"]
+
+[ext_resource type="Script" uid="uid://cfmy4xnlk1djg" path="res://assets/scenes/bullet.gd" id="1_8hx1n"]
+[ext_resource type="Texture2D" uid="uid://eq233ducvdb8" path="res://assets/art/2d/gun/projectiles.png" id="1_bnlrb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8hx1n"]
+radius = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t1ha"]
+atlas = ExtResource("1_bnlrb")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7fbq"]
+atlas = ExtResource("1_bnlrb")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmqvy"]
+atlas = ExtResource("1_bnlrb")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbu34"]
+atlas = ExtResource("1_bnlrb")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2axtw"]
+atlas = ExtResource("1_bnlrb")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r60kj"]
+atlas = ExtResource("1_bnlrb")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf0yw"]
+atlas = ExtResource("1_bnlrb")
+region = Rect2(320, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0r4bi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0t1ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7fbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmqvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbu34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2axtw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r60kj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf0yw")
+}],
+"loop": true,
+"name": &"shooting",
+"speed": 10.0
+}]
+
+[node name="Bullet" type="CharacterBody2D"]
+script = ExtResource("1_8hx1n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8hx1n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(4, 0)
+sprite_frames = SubResource("SpriteFrames_0r4bi")
+animation = &"shooting"

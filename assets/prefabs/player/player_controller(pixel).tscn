@@ -1,7 +1,8 @@
-[gd_scene load_steps=69 format=3 uid="uid://bimrbusqh5ikp"]
+[gd_scene load_steps=70 format=3 uid="uid://bimrbusqh5ikp"]
 
-[ext_resource type="Script" uid="uid://dthqi30nrjgmm" path="res://assets/scripts/player/player_controller(pixel).gd" id="1_70ait"]
+[ext_resource type="Script" uid="uid://dthqi30nrjgmm" path="res://assets/scripts/player/Player.gd" id="1_70ait"]
 [ext_resource type="Texture2D" uid="uid://qc8nj4x0yyh2" path="res://assets/art/2d/player/stick_figure/sf_ledge_climb_pixel.png" id="7_2q3ad"]
+[ext_resource type="PackedScene" uid="uid://c63rxw4ual61p" path="res://assets/scenes/gun.tscn" id="12_ykswe"]
 [ext_resource type="Texture2D" uid="uid://c7oorjswanvkv" path="res://assets/art/2d/player/stick_figure/sf_jump+fall_pixel.png" id="16_cstwa"]
 [ext_resource type="Texture2D" uid="uid://duekw3gw2y18m" path="res://assets/art/2d/player/stick_figure/sf_float_pixel.png" id="16_jsaws"]
 [ext_resource type="Texture2D" uid="uid://d3m1cwmgpkn1h" path="res://assets/art/2d/player/stick_figure/sf_dash_pixel.png" id="16_mpdld"]
@@ -524,3 +525,5 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 one_shot = true
+
+[node name="Gun" parent="." instance=ExtResource("12_ykswe")]

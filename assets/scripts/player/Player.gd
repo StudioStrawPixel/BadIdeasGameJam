@@ -44,6 +44,8 @@ const SPRINT_ACCELERATION := 1800.0
 @onready var ledge_space_ray_cast: RayCast2D = %LedgeSpaceRayCast
 @onready var wall_slide_ray_cast: RayCast2D = %WallSlideRayCast
 @onready var dash_cooldown: Timer = %DashCooldown
+@onready var gun: Sprite2D = $Gun
+
 
 var active_state := STATE.FALL
 var can_double_jump := false
@@ -52,11 +54,14 @@ var saved_position := Vector2.ZERO
 var can_dash := false
 var dash_jump_buffer := false
 var is_sprinting := false
+var is_gun_equipped: bool = false
+var was_gun_equipped_before_restricted: bool = false
 
 func _ready() -> void:
 	switch_state(active_state)
 	ledge_climb_ray_cast.add_exception(self)
-
+	gun.visible = false
+	gun.is_gun_equipped = false
 
 func _physics_process(delta: float) -> void:
 	process_state(delta)
@@ -362,3 +367,47 @@ func ledge_climb_offset() -> Vector2:
 
 func can_wall_slide() -> bool:
 	return is_on_wall_only() and wall_slide_ray_cast.is_colliding()
+
+func _process(delta: float) -> void:
+	if is_gun_equipped:
+		if get_global_mouse_position().x < global_position.x:
+			animated_sprite.flip_h = true
+		else:
+			animated_sprite.flip_h = false
+	var in_restricted_state := active_state in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FLOAT]
+
+	if in_restricted_state:
+		if is_gun_equipped:
+			was_gun_equipped_before_restricted = true
+			unequip_gun()
+	else:
+		if was_gun_equipped_before_restricted:
+			equip_gun()
+			was_gun_equipped_before_restricted = false
+	if gun:
+		gun.is_gun_equipped = is_gun_equipped
+
+func _input(event):
+	if event.is_action_pressed("toggle_gun"):
+		toggle_gun()
+
+func toggle_gun():
+	if is_gun_equipped:
+		unequip_gun()
+	else:
+		equip_gun()
+
+func equip_gun():
+	gun.visible = true
+	is_gun_equipped = true
+	gun.is_gun_equipped = true
+
+func unequip_gun():
+	gun.visible = false
+	is_gun_equipped = false
+	gun.is_gun_equipped = false
+
+func can_player_shoot() -> bool:
+	if active_state in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FALL,]:
+		return false
+	return is_gun_equipped
