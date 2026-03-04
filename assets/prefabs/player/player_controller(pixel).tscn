@@ -1,16 +1,16 @@
 [gd_scene load_steps=69 format=3 uid="uid://bimrbusqh5ikp"]
 
-[ext_resource type="Script" uid="uid://dfakw1cpmtonq" path="res://assets/scripts/player/player_controller(pixel).gd" id="1_70ait"]
-[ext_resource type="Texture2D" uid="uid://biwxgiligmo3r" path="res://assets/art/2d/player/stick_figure/sf_ledge_climb_pixel.png" id="7_2q3ad"]
-[ext_resource type="Texture2D" uid="uid://b64m3tnfb6wtw" path="res://assets/art/2d/player/stick_figure/sf_jump+fall_pixel.png" id="16_cstwa"]
-[ext_resource type="Texture2D" uid="uid://dmhvhrc6hm30x" path="res://assets/art/2d/player/stick_figure/sf_float_pixel.png" id="16_jsaws"]
-[ext_resource type="Texture2D" uid="uid://d0dv7okmc5qlb" path="res://assets/art/2d/player/stick_figure/sf_dash_pixel.png" id="16_mpdld"]
-[ext_resource type="Texture2D" uid="uid://cao7m4cccd2do" path="res://assets/art/2d/player/stick_figure/sf_idle_pixel.png" id="17_cstwa"]
-[ext_resource type="Texture2D" uid="uid://c6c4eborj56u1" path="res://assets/art/2d/player/stick_figure/sf_double_jump_pixel.png" id="17_o1e7l"]
-[ext_resource type="Texture2D" uid="uid://cw85tsegnqe2u" path="res://assets/art/2d/player/stick_figure/sf_run_pixel.png" id="18_mpdld"]
-[ext_resource type="Texture2D" uid="uid://bxamkf1v0wknc" path="res://assets/art/2d/player/stick_figure/sf_walk_pixel.png" id="19_o1e7l"]
-[ext_resource type="Texture2D" uid="uid://cyos7k7hrva0n" path="res://assets/art/2d/player/stick_figure/sf_wall_climb_pixel.png" id="28_ugyrt"]
-[ext_resource type="Texture2D" uid="uid://coheofvohw28g" path="res://assets/art/2d/player/stick_figure/sf_wall_slide_pixel.png" id="28_yeudl"]
+[ext_resource type="Script" uid="uid://dthqi30nrjgmm" path="res://assets/scripts/player/player_controller(pixel).gd" id="1_70ait"]
+[ext_resource type="Texture2D" uid="uid://qc8nj4x0yyh2" path="res://assets/art/2d/player/stick_figure/sf_ledge_climb_pixel.png" id="7_2q3ad"]
+[ext_resource type="Texture2D" uid="uid://c7oorjswanvkv" path="res://assets/art/2d/player/stick_figure/sf_jump+fall_pixel.png" id="16_cstwa"]
+[ext_resource type="Texture2D" uid="uid://duekw3gw2y18m" path="res://assets/art/2d/player/stick_figure/sf_float_pixel.png" id="16_jsaws"]
+[ext_resource type="Texture2D" uid="uid://d3m1cwmgpkn1h" path="res://assets/art/2d/player/stick_figure/sf_dash_pixel.png" id="16_mpdld"]
+[ext_resource type="Texture2D" uid="uid://dsdmjwg56u1dq" path="res://assets/art/2d/player/stick_figure/sf_idle_pixel.png" id="17_cstwa"]
+[ext_resource type="Texture2D" uid="uid://cvwj41pexjvnp" path="res://assets/art/2d/player/stick_figure/sf_double_jump_pixel.png" id="17_o1e7l"]
+[ext_resource type="Texture2D" uid="uid://dfwis04d1tv7t" path="res://assets/art/2d/player/stick_figure/sf_run_pixel.png" id="18_mpdld"]
+[ext_resource type="Texture2D" uid="uid://bwaov4vivff4p" path="res://assets/art/2d/player/stick_figure/sf_walk_pixel.png" id="19_o1e7l"]
+[ext_resource type="Texture2D" uid="uid://cnxygdoa0adod" path="res://assets/art/2d/player/stick_figure/sf_wall_climb_pixel.png" id="28_ugyrt"]
+[ext_resource type="Texture2D" uid="uid://d2ftawhhrmic" path="res://assets/art/2d/player/stick_figure/sf_wall_slide_pixel.png" id="28_yeudl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2q3ad"]
 radius = 9.0
@@ -475,7 +475,7 @@ position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_aowxt")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.14241342
+frame_progress = 0.2207509
 
 [node name="CameraOffset" type="Node2D" parent="."]
 position = Vector2(0, -33)
@@ -506,13 +506,18 @@ one_shot = true
 
 [node name="LedgeClimbRayCast" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(2, -23)
-target_position = Vector2(12, 18)
+position = Vector2(3, -26)
+target_position = Vector2(10, 23)
 
 [node name="LedgeSpaceRayCast" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-27, 26)
-target_position = Vector2(0, -54)
+position = Vector2(-26, 24)
+target_position = Vector2(0, -49)
+
+[node name="WallSlideRayCast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -10)
+target_position = Vector2(19, 0)
 
 [node name="DashCooldown" type="Timer" parent="."]
 unique_name_in_owner = true
