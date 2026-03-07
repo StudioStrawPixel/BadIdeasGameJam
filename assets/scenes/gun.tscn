@@ -12,7 +12,7 @@ region_rect = Rect2(160.1353, 600.9388, 58.366608, 65.19678)
 script = ExtResource("2_6ainy")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(49, 0)
+position = Vector2(53, 0)
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.3

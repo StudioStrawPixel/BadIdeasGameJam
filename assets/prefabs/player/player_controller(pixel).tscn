@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://d2ftawhhrmic" path="res://assets/art/2d/player/stick_figure/sf_wall_slide_pixel.png" id="28_yeudl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2q3ad"]
-radius = 9.0
-height = 48.0
+radius = 46.0
+height = 292.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_evtsp"]
 atlas = ExtResource("16_mpdld")
@@ -467,23 +467,28 @@ script = ExtResource("1_70ait")
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(-1, -118)
 shape = SubResource("CapsuleShape2D_2q3ad")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
-position = Vector2(0, -6)
+position = Vector2(-6, -147)
+scale = Vector2(4.866667, 4.8916664)
 sprite_frames = SubResource("SpriteFrames_aowxt")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.2207509
 
 [node name="CameraOffset" type="Node2D" parent="."]
 position = Vector2(0, -33)
 
 [node name="Camera2D" type="Camera2D" parent="CameraOffset"]
-zoom = Vector2(2, 2)
+position = Vector2(-14, -228)
 process_callback = 0
+limit_left = -9999234
+limit_top = -500
+limit_right = 10000766
+limit_bottom = 452
 position_smoothing_enabled = true
 position_smoothing_speed = 25.0
 drag_horizontal_enabled = true
@@ -527,3 +532,4 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Gun" parent="." instance=ExtResource("12_ykswe")]
+position = Vector2(25, -146)

@@ -1,9 +1,10 @@
-extends Node2D
+extends Area2D
 
 const SPEED: int = 300
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+var can_hit = true
 
 func _ready():
 	animated_sprite_2d.play()

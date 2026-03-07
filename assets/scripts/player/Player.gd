@@ -15,26 +15,26 @@ enum STATE {
 	TURNING,
 }
 
-const FALL_GRAVITY := 1500.0
-const FALL_VELOCITY := 500.0
-const WALK_VELOCITY := 200.0
-const JUMP_VELOCITY := -600.0
-const JUMP_DECELERATION := 1500.0
-const DOUBLE_JUMP_VELOCITY := -450.0
-const FLOAT_GRAVITY := 200.0
-const FLOAT_VELOCITY := 100.0
-const FLOAT_ACCELERATION := 700.0
-const LEDGE_JUMP_VELOCITY := -500.0
-const WALL_SLIDE_GRAVITY := 300.0
-const WALL_SLIDE_VELOCITY := 500.0
-const WALL_JUMP_LENGTH := 30.0
-const WALL_JUMP_VELOCITY := -500.0
-const WALL_CLIMB_VELOCITY := -300.0
+const FALL_GRAVITY := 3500.0
+const FALL_VELOCITY := 2500.0
+const WALK_VELOCITY := 1000.0
+const JUMP_VELOCITY := -2600.0
+const JUMP_DECELERATION := 3500.0
+const DOUBLE_JUMP_VELOCITY := -600.0
+const FLOAT_GRAVITY := 2200.0
+const FLOAT_VELOCITY := 2100.0
+const FLOAT_ACCELERATION := 2700.0
+const LEDGE_JUMP_VELOCITY := -2500.0
+const WALL_SLIDE_GRAVITY := 2300.0
+const WALL_SLIDE_VELOCITY := 2500.0
+const WALL_JUMP_LENGTH := 300.0
+const WALL_JUMP_VELOCITY := -1000.0
+const WALL_CLIMB_VELOCITY := -2300.0
 const WALL_CLIMB_LENGTH := 65.0
-const DASH_LENGTH := 100.0
-const DASH_VELOCITY := 600.0
-const SPRINT_VELOCITY := 400.0
-const SPRINT_ACCELERATION := 1800.0
+const DASH_LENGTH := 1000.0
+const DASH_VELOCITY := 1600.0
+const SPRINT_VELOCITY := 1400.0
+const SPRINT_ACCELERATION := 3800.0
 
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
 @onready var coyote_timer: Timer = %CoyoteTimer
@@ -56,6 +56,7 @@ var dash_jump_buffer := false
 var is_sprinting := false
 var is_gun_equipped: bool = false
 var was_gun_equipped_before_restricted: bool = false
+
 
 func _ready() -> void:
 	switch_state(active_state)
@@ -411,3 +412,4 @@ func can_player_shoot() -> bool:
 	if active_state in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FALL,]:
 		return false
 	return is_gun_equipped
+	

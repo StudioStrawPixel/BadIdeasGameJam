@@ -63,7 +63,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Bullet" type="CharacterBody2D"]
+[node name="Bullet" type="Area2D" groups=["bullet"]]
+collision_mask = 2
 script = ExtResource("1_8hx1n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -74,3 +75,5 @@ texture_filter = 1
 position = Vector2(4, 0)
 sprite_frames = SubResource("SpriteFrames_0r4bi")
 animation = &"shooting"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
