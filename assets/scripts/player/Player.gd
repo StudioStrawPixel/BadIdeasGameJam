@@ -18,7 +18,7 @@ enum STATE {
 const FALL_GRAVITY := 3500.0
 const FALL_VELOCITY := 2500.0
 const WALK_VELOCITY := 1000.0
-const JUMP_VELOCITY := -2600.0
+const JUMP_VELOCITY := -1600.0
 const JUMP_DECELERATION := 3500.0
 const DOUBLE_JUMP_VELOCITY := -600.0
 const FLOAT_GRAVITY := 2200.0
@@ -177,6 +177,8 @@ func process_state(delta: float) -> void:
 				switch_state(STATE.DASH)
 		
 		STATE.FLOOR:
+			if is_gun_equipped:
+				return
 			if is_sprinting:
 				animated_sprite.play("sprint")
 				handle_sprint(delta)
@@ -399,6 +401,7 @@ func toggle_gun():
 		equip_gun()
 
 func equip_gun():
+	animated_sprite.play("gun_equip")
 	gun.visible = true
 	is_gun_equipped = true
 	gun.is_gun_equipped = true

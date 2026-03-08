@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://da84ajuoi0pue"]
+
+[ext_resource type="Script" uid="uid://b2bk35y1vvgp1" path="res://assets/scripts/game.gd" id="1_0nt35"]
+[ext_resource type="Texture2D" uid="uid://b8taas26d68wu" path="res://assets/art/Background and Decor/Mossy Tileset/Mossy - TileSet.png" id="2_4pjnc"]
+[ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/prefabs/player/player_controller(pixel).tscn" id="2_jm60u"]
+[ext_resource type="PackedScene" uid="uid://cvnkp5focks7l" path="res://assets/scenes/box.tscn" id="9_ke6qc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_snkx0"]
+texture = ExtResource("2_4pjnc")
+texture_region_size = Vector2i(50, 50)
+0:0/size_in_atlas = Vector2i(5, 4)
+0:0/0 = 0
+5:0/size_in_atlas = Vector2i(5, 4)
+5:0/0 = 0
+10:0/size_in_atlas = Vector2i(10, 4)
+10:0/0 = 0
+20:0/size_in_atlas = Vector2i(8, 4)
+20:0/0 = 0
+28:0/size_in_atlas = Vector2i(2, 4)
+28:0/0 = 0
+0:4/size_in_atlas = Vector2i(4, 5)
+0:4/0 = 0
+0:9/size_in_atlas = Vector2i(4, 12)
+0:9/0 = 0
+0:21/size_in_atlas = Vector2i(4, 7)
+0:21/0 = 0
+31:0/size_in_atlas = Vector2i(9, 4)
+31:0/0 = 0
+31:4/size_in_atlas = Vector2i(3, 12)
+31:4/0 = 0
+31:16/size_in_atlas = Vector2i(3, 11)
+31:16/0 = 0
+47:6/size_in_atlas = Vector2i(8, 9)
+47:6/0 = 0
+46:26/size_in_atlas = Vector2i(9, 9)
+46:26/0 = 0
+5:37/size_in_atlas = Vector2i(11, 4)
+5:37/0 = 0
+16:37/size_in_atlas = Vector2i(10, 4)
+16:37/0 = 0
+4:31/size_in_atlas = Vector2i(5, 4)
+4:31/0 = 0
+9:31/size_in_atlas = Vector2i(8, 4)
+9:31/0 = 0
+17:31/size_in_atlas = Vector2i(6, 4)
+17:31/0 = 0
+28:61/0 = 0
+21:41/size_in_atlas = Vector2i(20, 4)
+21:41/0 = 0
+21:41/0/physics_layer_0/polygon_0/points = PackedVector2Array(-500.5, 69, 497.5, 67, 499.5, 100, -499.5, 98)
+
+[sub_resource type="TileSet" id="TileSet_i66uq"]
+tile_size = Vector2i(50, 50)
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_snkx0")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_peglp"]
+normal = Vector2(-0.0031745872, -0.99999493)
+distance = -447.9946
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_0nt35")
+
+[node name="Basic Tilemap" type="TileMap" parent="."]
+z_index = 10
+scale = Vector2(0.3, 0.3)
+tile_set = SubResource("TileSet_i66uq")
+format = 2
+
+[node name="Player" parent="." instance=ExtResource("2_jm60u")]
+position = Vector2(-214, 447)
+
+[node name="bubble" type="Marker2D" parent="Player"]
+position = Vector2(51, -244)
+
+[node name="World Bottom" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Bottom"]
+shape = SubResource("WorldBoundaryShape2D_peglp")
+
+[node name="Boxes" type="Node" parent="."]
+
+[node name="Box" parent="." instance=ExtResource("9_ke6qc")]
+position = Vector2(254, 33)
