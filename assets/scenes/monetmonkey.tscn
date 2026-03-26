@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://butmkyyg0eaby"]
+
+[ext_resource type="Texture2D" uid="uid://bspltuciavelp" path="res://assets/art/characters/mokeyall.png" id="1_22oo1"]
+[ext_resource type="Script" uid="uid://bbttxyfyw8r0i" path="res://assets/scripts/monetmonkey.gd" id="1_wye12"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wye12"]
+atlas = ExtResource("1_22oo1")
+region = Rect2(2020, 32, 602, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7h6s"]
+atlas = ExtResource("1_22oo1")
+region = Rect2(1459, 32, 602, 1080)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6lqjo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wye12")
+}],
+"loop": true,
+"name": &"monetbox",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7h6s")
+}],
+"loop": true,
+"name": &"monetnobox",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctjd2"]
+size = Vector2(392.5, 584)
+
+[node name="Monkey" type="Area2D"]
+script = ExtResource("1_wye12")
+
+[node name="Monet" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.7, 0.601)
+sprite_frames = SubResource("SpriteFrames_6lqjo")
+animation = &"monetbox"
+
+[node name="MonetCollsion" type="CollisionShape2D" parent="."]
+position = Vector2(23, 85)
+shape = SubResource("RectangleShape2D_ctjd2")

@@ -18,11 +18,12 @@ scene = ExtResource("3_1j0kw")
 script = ExtResource("2_i258d")
 scene = ExtResource("4_86vyh")
 overrides = {
-"name_label_box_modulate": "Color(0.26160693, 0.78515625, 0.2024231, 1)",
-"name_label_font": "\"res://monogram.ttf\"",
+"name_label_box_modulate": "Color(0.39215687, 0.8627451, 0.50980395, 1)",
+"name_label_font": "\"res://assets/art/2d/text boxes/HugMeTight-GzZq.ttf\"",
 "name_label_font_size": "34.0",
-"normal_font": "\"res://monogram.ttf\"",
-"text_size": "30.0"
+"normal_font": "\"res://assets/art/2d/text boxes/HugMeTight-GzZq.ttf\"",
+"text_max_width": "500.0",
+"text_size": "20.0"
 }
 
 [resource]

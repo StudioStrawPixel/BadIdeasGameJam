@@ -1,29 +1,23 @@
-[gd_scene load_steps=27 format=3 uid="uid://da84ajuoi0pue"]
+[gd_scene load_steps=21 format=3 uid="uid://da84ajuoi0pue"]
 
 [ext_resource type="Script" uid="uid://b2bk35y1vvgp1" path="res://assets/scripts/game.gd" id="1_0nt35"]
 [ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="2_jm60u"]
 [ext_resource type="Texture2D" uid="uid://4w33uel427s3" path="res://assets/art/Background and Decor/simple_terrain.png" id="4_4pjnc"]
-[ext_resource type="Texture2D" uid="uid://d2lrxnllkegob" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_tree2.png" id="5_imqpt"]
 [ext_resource type="Texture2D" uid="uid://b7ae4ydepc12s" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Sky.png" id="5_qbana"]
 [ext_resource type="Texture2D" uid="uid://baromlk17y8mv" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/BG_Decor.png" id="6_18sfs"]
-[ext_resource type="Texture2D" uid="uid://u2sqgyk2s4mn" path="res://assets/art/Background and Decor/Fantasy Forest 1/tree2.png" id="6_i66uq"]
-[ext_resource type="Texture2D" uid="uid://dbjqdq02j6804" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_tree3.png" id="6_texi3"]
-[ext_resource type="Texture2D" uid="uid://dgsenug41hniq" path="res://assets/art/Background and Decor/Fantasy Forest 1/tree1.png" id="6_yrqgp"]
 [ext_resource type="Texture2D" uid="uid://cf10cq51yhawg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Middle_Decor.png" id="7_nx1da"]
-[ext_resource type="Texture2D" uid="uid://dcaf1j5k4ywra" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_top2.png" id="7_p3ih3"]
 [ext_resource type="Texture2D" uid="uid://bx5g6piqvtyvg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Foreground.png" id="8_pnptk"]
 [ext_resource type="PackedScene" uid="uid://cvnkp5focks7l" path="res://assets/scenes/box.tscn" id="9_ke6qc"]
-[ext_resource type="Texture2D" uid="uid://7gsynks71xbk" path="res://assets/art/Background and Decor/Fantasy Forest 1/grass1.png" id="9_mffkj"]
 [ext_resource type="Texture2D" uid="uid://b673ur31mqa20" path="res://assets/art/Background and Decor/Fantasy Forest 1/stone3.png" id="10_m3gqh"]
-[ext_resource type="Texture2D" uid="uid://btsjjw10ohkjt" path="res://assets/art/Background and Decor/Fantasy Forest 1/bush3.png" id="11_23wsg"]
-[ext_resource type="Texture2D" uid="uid://dwpig1dqqjxa2" path="res://assets/art/Background and Decor/Fantasy Forest 1/tree3.png" id="12_ews07"]
-[ext_resource type="Texture2D" uid="uid://u8fjgcw5k7gs" path="res://assets/art/Background and Decor/Fantasy Forest 1/plant2.png" id="13_gbp6d"]
-[ext_resource type="Texture2D" uid="uid://dw4wbmrg51pgo" path="res://assets/art/Background and Decor/Fantasy Forest 1/top3.png" id="13_oi8b3"]
+[ext_resource type="Texture2D" uid="uid://bgu8n6jx4qrh7" path="res://assets/art/Background and Decor/glorp bush no glorp.png" id="11_ews07"]
+[ext_resource type="Texture2D" uid="uid://dqbfkcp5i02xn" path="res://assets/art/Background and Decor/bush no flower.png" id="12_oi8b3"]
+[ext_resource type="Texture2D" uid="uid://sie32ehhcdse" path="res://assets/art/Background and Decor/forest ground.png" id="14_oi8b3"]
 [ext_resource type="Texture2D" uid="uid://cx3dri212bmlr" path="res://assets/art/Background and Decor/Big Tree/tree2.png" id="15_qbana"]
-[ext_resource type="Texture2D" uid="uid://b7umugofm7jba" path="res://assets/art/Background and Decor/Fantasy Forest 1/stone7.png" id="19_18sfs"]
-[ext_resource type="Texture2D" uid="uid://cxppa21wq7x4g" path="res://assets/art/Background and Decor/Fantasy Forest 1/stone4.png" id="20_nx1da"]
-[ext_resource type="Texture2D" uid="uid://dbra857wv7y6u" path="res://assets/art/Background and Decor/Fantasy Forest 1/stone1.png" id="21_pnptk"]
-[ext_resource type="Texture2D" uid="uid://djhg1ab3h40w6" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_top4.png" id="22_3l1ex"]
+[ext_resource type="Texture2D" uid="uid://u6txcmo7hcvx" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Ground.png" id="15_r7qpo"]
+[ext_resource type="Script" uid="uid://cotwbkdn5vhdd" path="res://assets/scenes/levels/camera_limits.gd" id="18_oi8b3"]
+[ext_resource type="PackedScene" uid="uid://7n8oulgl1q1h" path="res://assets/scenes/left_boundry.tscn" id="23_texi3"]
+[ext_resource type="PackedScene" uid="uid://3be3phhcmcti" path="res://assets/scenes/rightboundry_start.tscn" id="24_p3ih3"]
+[ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="25_gbp6d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_snkx0"]
 texture = ExtResource("4_4pjnc")
@@ -48,7 +42,7 @@ z_index = 1
 position = Vector2(-214, 447)
 
 [node name="bubble" type="Marker2D" parent="Player"]
-position = Vector2(51, -244)
+position = Vector2(99, -391)
 
 [node name="Boxes" type="Node" parent="."]
 
@@ -69,7 +63,7 @@ position = Vector2(-1302, -7)
 
 [node name="Parallax2D" type="Parallax2D" parent="BackgroundDecor/-3"]
 scroll_scale = Vector2(0.5, 0.5)
-repeat_size = Vector2(1920, 0)
+repeat_size = Vector2(3800, 0)
 repeat_times = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D"]
@@ -80,7 +74,7 @@ centered = false
 
 [node name="Parallax2D2" type="Parallax2D" parent="BackgroundDecor/-3"]
 scroll_scale = Vector2(0.7, 0.7)
-repeat_size = Vector2(1920, 0)
+repeat_size = Vector2(3800, 0)
 repeat_times = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D2"]
@@ -91,7 +85,7 @@ centered = false
 
 [node name="Parallax2D3" type="Parallax2D" parent="BackgroundDecor/-3"]
 scroll_scale = Vector2(0.9, 0.9)
-repeat_size = Vector2(1920, 0)
+repeat_size = Vector2(3800, 0)
 repeat_times = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D3"]
@@ -101,7 +95,7 @@ texture = ExtResource("7_nx1da")
 centered = false
 
 [node name="Parallax2D4" type="Parallax2D" parent="BackgroundDecor/-3"]
-repeat_size = Vector2(1920, 0)
+repeat_size = Vector2(3800, 0)
 repeat_times = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D4"]
@@ -114,105 +108,69 @@ centered = false
 visible = false
 z_index = -20
 
-[node name="BgTree2" type="Sprite2D" parent="BackgroundDecor/-2"]
-position = Vector2(-1170, -249.99995)
-scale = Vector2(2.4442508, 1.95)
-texture = ExtResource("5_imqpt")
-
-[node name="BgTree3" type="Sprite2D" parent="BackgroundDecor/-2"]
-position = Vector2(-383, -279)
-scale = Vector2(2.3566177, 3.4139464)
-texture = ExtResource("6_texi3")
-
-[node name="BgTop2" type="Sprite2D" parent="BackgroundDecor/-2"]
-position = Vector2(-297, -619)
-scale = Vector2(3.3702066, 2.7061403)
-texture = ExtResource("7_p3ih3")
-
-[node name="BgTop4" type="Sprite2D" parent="BackgroundDecor/-2"]
-position = Vector2(-1212.0001, -680)
-scale = Vector2(3.116883, 2.6584907)
-texture = ExtResource("22_3l1ex")
-
 [node name="-1" type="Node2D" parent="BackgroundDecor"]
 z_index = -10
 
 [node name="Stone3" type="Sprite2D" parent="BackgroundDecor/-1"]
-position = Vector2(-1580, 329)
+position = Vector2(-1531, 369)
 scale = Vector2(2.3350515, 2.2901235)
 texture = ExtResource("10_m3gqh")
 
-[node name="Tree2" type="Sprite2D" parent="BackgroundDecor/-1"]
-position = Vector2(-1704, -4)
-scale = Vector2(1.7682216, 1.5067453)
-texture = ExtResource("6_i66uq")
+[node name="GlorpBushNoGlorp" type="Sprite2D" parent="BackgroundDecor/-1"]
+position = Vector2(-1843, 294)
+scale = Vector2(0.6933333, 0.60333335)
+texture = ExtResource("11_ews07")
 
-[node name="Tree1" type="Sprite2D" parent="BackgroundDecor/-1"]
-position = Vector2(-1356, 179)
-texture = ExtResource("6_yrqgp")
+[node name="GlorpBushNoGlorp2" type="Sprite2D" parent="BackgroundDecor/-1"]
+position = Vector2(367.5, 237.5)
+scale = Vector2(0.97166663, 0.8883333)
+texture = ExtResource("11_ews07")
+
+[node name="BushNoFlower" type="Sprite2D" parent="BackgroundDecor/-1"]
+position = Vector2(1792, 266)
+texture = ExtResource("12_oi8b3")
+
+[node name="BushNoFlower2" type="Sprite2D" parent="BackgroundDecor/-1"]
+position = Vector2(3605, 232)
+texture = ExtResource("12_oi8b3")
 
 [node name="0" type="Node2D" parent="BackgroundDecor"]
 
-[node name="Bush3" type="Sprite2D" parent="BackgroundDecor/0"]
-position = Vector2(-921, 284)
-scale = Vector2(4.599099, 3.5337079)
-texture = ExtResource("11_23wsg")
-
-[node name="Bush4" type="Sprite2D" parent="BackgroundDecor/0"]
-position = Vector2(522, 336)
-scale = Vector2(4.599099, 3.5337079)
-texture = ExtResource("11_23wsg")
-
-[node name="Bush5" type="Sprite2D" parent="BackgroundDecor/0"]
-position = Vector2(2084, 365)
-scale = Vector2(4.599099, 3.5337079)
-texture = ExtResource("11_23wsg")
+[node name="ForestGround" type="Sprite2D" parent="BackgroundDecor/0"]
+position = Vector2(964, 162)
+scale = Vector2(1.5992187, 1)
+texture = ExtResource("14_oi8b3")
 
 [node name="1" type="Node2D" parent="BackgroundDecor"]
 z_index = 10
 
-[node name="Plant2" type="Sprite2D" parent="BackgroundDecor/1"]
-position = Vector2(-313, 673)
-scale = Vector2(5, 2.3404255)
-texture = ExtResource("13_gbp6d")
-
-[node name="Grass1" type="Sprite2D" parent="BackgroundDecor/1"]
-position = Vector2(-1753, 547.00006)
-scale = Vector2(5.1923075, 5.314815)
-texture = ExtResource("9_mffkj")
-
-[node name="Tree2" type="Sprite2D" parent="BackgroundDecor/1"]
-position = Vector2(-2735, -1410)
-scale = Vector2(0.87841725, 1.4898118)
-texture = ExtResource("15_qbana")
-
 [node name="2" type="Node2D" parent="BackgroundDecor"]
 z_index = 20
 
-[node name="Tree3" type="Sprite2D" parent="BackgroundDecor/2"]
-position = Vector2(-1273.0001, 555)
-scale = Vector2(1.4160516, 1.6065216)
-texture = ExtResource("12_ews07")
-
-[node name="Top3" type="Sprite2D" parent="BackgroundDecor/2"]
-position = Vector2(-1288, 267.00003)
-scale = Vector2(1.213198, 1.4734849)
-texture = ExtResource("13_oi8b3")
+[node name="Tree2" type="Sprite2D" parent="BackgroundDecor/2"]
+position = Vector2(-2680, -1410)
+scale = Vector2(0.87841725, 1.4898118)
+texture = ExtResource("15_qbana")
 
 [node name="3" type="Node2D" parent="BackgroundDecor"]
 z_index = 30
 
-[node name="Stone7" type="Sprite2D" parent="BackgroundDecor/3"]
-position = Vector2(-1460, 830)
-scale = Vector2(3.8055553, 3.5099978)
-texture = ExtResource("19_18sfs")
+[node name="Ground" type="Sprite2D" parent="BackgroundDecor/3"]
+position = Vector2(666, -149)
+scale = Vector2(3.5239584, 1.3101852)
+texture = ExtResource("15_r7qpo")
 
-[node name="Stone4" type="Sprite2D" parent="BackgroundDecor/3"]
-position = Vector2(115.999756, 796)
-scale = Vector2(1.5862069, 2.3157895)
-texture = ExtResource("20_nx1da")
+[node name="Left Boundry" parent="." instance=ExtResource("23_texi3")]
+position = Vector2(-2493, -3327)
 
-[node name="Stone1" type="Sprite2D" parent="BackgroundDecor/3"]
-position = Vector2(-708, 792.00006)
-scale = Vector2(1.4224138, 3)
-texture = ExtResource("21_pnptk")
+[node name="rightboundry start" parent="." instance=ExtResource("24_p3ih3")]
+position = Vector2(4053, 448)
+
+[node name="Fade" parent="." instance=ExtResource("25_gbp6d")]
+
+[node name="CameraLimits" type="Node2D" parent="."]
+script = ExtResource("18_oi8b3")
+left_limit = -3000
+right_limit = 3250
+top_limit = -1500
+bottom_limit = 550

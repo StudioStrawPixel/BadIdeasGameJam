@@ -1,0 +1,147 @@
+[gd_scene load_steps=17 format=3 uid="uid://dulqeu7l2a5h4"]
+
+[ext_resource type="Script" uid="uid://df3jc67qtrd1t" path="res://assets/scripts/monet.gd" id="1_pxvrf"]
+[ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="2_l1rhi"]
+[ext_resource type="Texture2D" uid="uid://4w33uel427s3" path="res://assets/art/Background and Decor/simple_terrain.png" id="4_5nlxu"]
+[ext_resource type="Texture2D" uid="uid://b7ae4ydepc12s" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Sky.png" id="5_mjxdv"]
+[ext_resource type="Texture2D" uid="uid://baromlk17y8mv" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/BG_Decor.png" id="6_kgqms"]
+[ext_resource type="Texture2D" uid="uid://cf10cq51yhawg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Middle_Decor.png" id="7_5nx4h"]
+[ext_resource type="Texture2D" uid="uid://bx5g6piqvtyvg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Foreground.png" id="8_mn64q"]
+[ext_resource type="Texture2D" uid="uid://d2lrxnllkegob" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_tree2.png" id="9_2tpe0"]
+[ext_resource type="Texture2D" uid="uid://dbjqdq02j6804" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_tree3.png" id="10_a67ri"]
+[ext_resource type="Texture2D" uid="uid://dcaf1j5k4ywra" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_top2.png" id="11_eablm"]
+[ext_resource type="Texture2D" uid="uid://djhg1ab3h40w6" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_top4.png" id="12_6247m"]
+[ext_resource type="Texture2D" uid="uid://7gsynks71xbk" path="res://assets/art/Background and Decor/Fantasy Forest 1/grass1.png" id="18_73oqf"]
+[ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="21_axqxr"]
+[ext_resource type="PackedScene" uid="uid://7n8oulgl1q1h" path="res://assets/scenes/left_boundry.tscn" id="23_3agxk"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_snkx0"]
+texture = ExtResource("4_5nlxu")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_i66uq"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_snkx0")
+
+[node name="Monet" type="Node2D"]
+script = ExtResource("1_pxvrf")
+
+[node name="Player" parent="." instance=ExtResource("2_l1rhi")]
+z_index = 1
+position = Vector2(-1504, 471)
+
+[node name="bubble" type="Marker2D" parent="Player"]
+position = Vector2(99, -391)
+
+[node name="Boxes" type="Node" parent="."]
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(10, 10)
+tile_set = SubResource("TileSet_i66uq")
+format = 2
+layer_0/tile_data = PackedInt32Array(262142, 131072, 0, 262143, 131072, 0, 196608, 131072, 0, 262141, 131072, 0, 262140, 131072, 0, 262139, 131072, 0, 262138, 131072, 0, 262137, 131072, 0, 262136, 131072, 0, 262135, 131072, 0, 262134, 131072, 0, 262133, 131072, 0, 196609, 131072, 0, 196610, 131072, 0, 196611, 131072, 0, 196612, 131072, 0, 196613, 131072, 0, 196614, 131072, 0, 196615, 131072, 0, 196617, 131072, 0, 196616, 131072, 0, 196618, 131072, 0, 196619, 131072, 0, 196620, 131072, 0, 262132, 131072, 0, 262131, 131072, 0, 196621, 131072, 0, 196622, 131072, 0, 196623, 131072, 0, 196624, 131072, 0, 196625, 131072, 0, 196626, 131072, 0, 196627, 131072, 0, 196628, 131072, 0, 196629, 131072, 0, 196630, 131072, 0, 196631, 131072, 0, 131095, 131072, 0, 65559, 131072, 0, 23, 131072, 0, -65513, 131072, 0, -131049, 131072, 0, -196585, 131072, 0, 262130, 131072, 0, 196594, 131072, 0, 131058, 131072, 0, 65522, 131072, 0, -14, 131072, 0, -65550, 131072, 0, -131086, 131072, 0, -196622, 131072, 0)
+
+[node name="BackgroundDecor" type="Node2D" parent="."]
+
+[node name="-3" type="Node2D" parent="BackgroundDecor"]
+z_index = -30
+position = Vector2(-1302, -7)
+
+[node name="Parallax2D" type="Parallax2D" parent="BackgroundDecor/-3"]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("5_mjxdv")
+centered = false
+
+[node name="Parallax2D2" type="Parallax2D" parent="BackgroundDecor/-3"]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D2"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("6_kgqms")
+centered = false
+
+[node name="Parallax2D3" type="Parallax2D" parent="BackgroundDecor/-3"]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D3"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("7_5nx4h")
+centered = false
+
+[node name="Parallax2D4" type="Parallax2D" parent="BackgroundDecor/-3"]
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D4"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("8_mn64q")
+centered = false
+
+[node name="-2" type="Node2D" parent="BackgroundDecor"]
+visible = false
+z_index = -20
+
+[node name="BgTree2" type="Sprite2D" parent="BackgroundDecor/-2"]
+position = Vector2(-1170, -249.99995)
+scale = Vector2(2.4442508, 1.95)
+texture = ExtResource("9_2tpe0")
+
+[node name="BgTree3" type="Sprite2D" parent="BackgroundDecor/-2"]
+position = Vector2(-383, -279)
+scale = Vector2(2.3566177, 3.4139464)
+texture = ExtResource("10_a67ri")
+
+[node name="BgTop2" type="Sprite2D" parent="BackgroundDecor/-2"]
+position = Vector2(-297, -619)
+scale = Vector2(3.3702066, 2.7061403)
+texture = ExtResource("11_eablm")
+
+[node name="BgTop4" type="Sprite2D" parent="BackgroundDecor/-2"]
+position = Vector2(-1212.0001, -680)
+scale = Vector2(3.116883, 2.6584907)
+texture = ExtResource("12_6247m")
+
+[node name="-1" type="Node2D" parent="BackgroundDecor"]
+z_index = -10
+
+[node name="0" type="Node2D" parent="BackgroundDecor"]
+
+[node name="1" type="Node2D" parent="BackgroundDecor"]
+z_index = 10
+
+[node name="Grass1" type="Sprite2D" parent="BackgroundDecor/1"]
+position = Vector2(-1753, 547.00006)
+scale = Vector2(5.1923075, 5.314815)
+texture = ExtResource("18_73oqf")
+
+[node name="2" type="Node2D" parent="BackgroundDecor"]
+z_index = 20
+
+[node name="3" type="Node2D" parent="BackgroundDecor"]
+z_index = 30
+
+[node name="Left Boundry" parent="." instance=ExtResource("23_3agxk")]
+position = Vector2(-2493, -3327)
+
+[node name="Fade" parent="." instance=ExtResource("21_axqxr")]
+visible = false

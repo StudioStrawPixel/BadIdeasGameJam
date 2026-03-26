@@ -18,9 +18,9 @@ enum STATE {
 const FALL_GRAVITY := 3500.0
 const FALL_VELOCITY := 2500.0
 const WALK_VELOCITY := 1000.0
-const JUMP_VELOCITY := -1600.0
+const JUMP_VELOCITY := -2000.0
 const JUMP_DECELERATION := 3500.0
-const DOUBLE_JUMP_VELOCITY := -600.0
+const DOUBLE_JUMP_VELOCITY := -1600.0
 const FLOAT_GRAVITY := 2200.0
 const FLOAT_VELOCITY := 2100.0
 const FLOAT_ACCELERATION := 2700.0
@@ -36,16 +36,16 @@ const DASH_VELOCITY := 1600.0
 const SPRINT_VELOCITY := 1400.0
 const SPRINT_ACCELERATION := 3800.0
 
-@onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
-@onready var coyote_timer: Timer = %CoyoteTimer
-@onready var float_cooldown: Timer = %FloatCooldown
-@onready var player_collider: CollisionShape2D = %PlayerCollider
-@onready var ledge_climb_ray_cast: RayCast2D = %LedgeClimbRayCast
-@onready var ledge_space_ray_cast: RayCast2D = %LedgeSpaceRayCast
-@onready var wall_slide_ray_cast: RayCast2D = %WallSlideRayCast
-@onready var dash_cooldown: Timer = %DashCooldown
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
+@onready var coyote_timer: Timer = $CoyoteTimer
+@onready var float_cooldown: Timer = $FloatCooldown
+@onready var player_collider: CollisionShape2D = $PlayerCollider
+@onready var ledge_climb_ray_cast: RayCast2D = $LedgeClimbRayCast
+@onready var ledge_space_ray_cast: RayCast2D = $LedgeSpaceRayCast
+@onready var wall_slide_ray_cast: RayCast2D = $WallSlideRayCast
+@onready var dash_cooldown: Timer = $DashCooldown
 @onready var gun: Sprite2D = $Gun
-
+@onready var camera_2d: Camera2D = $CameraOffset/Camera2D
 
 var active_state := STATE.FALL
 var can_double_jump := false
@@ -56,110 +56,36 @@ var dash_jump_buffer := false
 var is_sprinting := false
 var is_gun_equipped: bool = false
 var was_gun_equipped_before_restricted: bool = false
-
+var in_dialogue: bool = false
+var is_equipping_gun: bool = false
 
 func _ready() -> void:
 	switch_state(active_state)
 	ledge_climb_ray_cast.add_exception(self)
-	gun.visible = false
-	gun.is_gun_equipped = false
+	if gun:
+		gun.visible = false
+		gun.call("unequip")
+	set_camera_limits()
+	camera_2d.make_current()
+	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
-	process_state(delta)
+	if in_dialogue:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	if not is_equipping_gun:
+		process_state(delta)
 	move_and_slide()
-
-
-func switch_state(to_state: STATE) -> void:
-	var previous_state := active_state
-	active_state = to_state
-	
-	## State specific things that only need to run once upon entering the next state.
-	match active_state:
-		STATE.FALL:
-			if previous_state != STATE.DOUBLE_JUMP:
-				animated_sprite.play("fall")
-			if previous_state == STATE.FLOOR:
-				coyote_timer.start()
-		
-		STATE.FLOOR:
-			can_double_jump = true
-			can_dash = true
-		
-		STATE.JUMP:
-			if previous_state != STATE.TURNING:
-				animated_sprite.play("jump")
-			velocity.y = JUMP_VELOCITY
-			coyote_timer.stop()
-		
-		STATE.DOUBLE_JUMP:
-			animated_sprite.play("double_jump")
-			velocity.y = DOUBLE_JUMP_VELOCITY
-			can_double_jump = false
-			is_sprinting = false
-		
-		STATE.FLOAT:
-			if float_cooldown.time_left > 0:
-				active_state = previous_state
-				return
-			animated_sprite.play("float")
-			velocity.y = 0
-			is_sprinting = false
-		
-		STATE.LEDGE_CLIMB:
-			animated_sprite.play("ledge_climb")
-			velocity = Vector2.ZERO
-			global_position.y = ledge_climb_ray_cast.get_collision_point().y
-			can_double_jump = true
-		
-		STATE.LEDGE_JUMP:
-			animated_sprite.play("double_jump")
-			velocity.y = LEDGE_JUMP_VELOCITY
-			can_dash = true
-			is_sprinting = false
-		
-		STATE.WALL_SLIDE:
-			animated_sprite.play("wall_slide")
-			velocity.y = 0
-			can_double_jump = true
-			can_dash = true
-			is_sprinting = false
-		
-		STATE.WALL_JUMP:
-			animated_sprite.play("jump")
-			velocity.y = WALL_JUMP_VELOCITY
-			set_facing_direction(-facing_direction)
-			saved_position = position
-		
-		STATE.WALL_CLIMB:
-			animated_sprite.play("wall_climb")
-			velocity.y = WALL_CLIMB_VELOCITY
-			saved_position = position
-		
-		STATE.DASH:
-			if dash_cooldown.time_left > 0:
-				active_state = previous_state
-				return
-			animated_sprite.play("dash")
-			velocity.y = 0
-			set_facing_direction(signf(Input.get_axis("move_left", "move_right")))
-			velocity.x = facing_direction * DASH_VELOCITY
-			saved_position = position
-			can_dash = previous_state == STATE.FLOOR or previous_state == STATE.WALL_SLIDE
-			dash_jump_buffer = false
-		
-		STATE.TURNING:
-			set_facing_direction(-facing_direction)
-
 
 func process_state(delta: float) -> void:
 	match active_state:
 		STATE.FALL:
 			velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
-			if is_sprinting:
+			if Input.is_action_pressed("sprint") and not is_on_wall():
 				handle_sprint(delta)
 			else:
 				handle_movement()
-			
 			if is_on_floor():
 				switch_state(STATE.FLOOR)
 			elif Input.is_action_just_pressed("jump"):
@@ -169,167 +95,99 @@ func process_state(delta: float) -> void:
 					switch_state(STATE.DOUBLE_JUMP)
 				else:
 					switch_state(STATE.FLOAT)
-			elif is_input_toward_facing() and is_ledge() and is_space():
-				switch_state(STATE.LEDGE_CLIMB)
-			elif is_input_toward_facing() and can_wall_slide():
-				switch_state(STATE.WALL_SLIDE)
-			elif Input.is_action_just_pressed("sprint") and can_dash:
-				switch_state(STATE.DASH)
-		
 		STATE.FLOOR:
-			if is_gun_equipped:
-				return
-			if is_sprinting:
+			if Input.is_action_pressed("sprint") and not is_on_wall():
 				animated_sprite.play("sprint")
 				handle_sprint(delta)
 			else:
-				if Input.get_axis("move_left", "move_right"):
+				if Input.get_axis("move_left", "move_right") != 0:
 					animated_sprite.play("walk")
 				else:
 					animated_sprite.play("idle")
 				handle_movement()
-			
 			if not is_on_floor():
 				switch_state(STATE.FALL)
 			elif Input.is_action_just_pressed("jump"):
 				switch_state(STATE.JUMP)
-			elif Input.is_action_just_pressed("sprint"):
-				switch_state(STATE.DASH)
-			elif is_sprinting and is_input_against_facing():
-				switch_state(STATE.TURNING)
-		
-		STATE.JUMP, STATE.DOUBLE_JUMP, STATE.LEDGE_JUMP, STATE.WALL_JUMP:
+		STATE.JUMP, STATE.DOUBLE_JUMP:
 			velocity.y = move_toward(velocity.y, 0, JUMP_DECELERATION * delta)
-			if active_state == STATE.WALL_JUMP:
-				var distance := absf(position.x - saved_position.x)
-				if distance >= WALL_JUMP_LENGTH or can_wall_slide():
-					active_state = STATE.JUMP
-				else:
-					handle_movement(facing_direction)
-			
-			if is_sprinting:
+			if Input.is_action_pressed("sprint") and not is_on_wall():
 				handle_sprint(delta)
-			elif active_state != STATE.WALL_JUMP:
+			else:
 				handle_movement()
-			
 			if Input.is_action_just_released("jump") or velocity.y >= 0:
-				velocity.y = 0
 				switch_state(STATE.FALL)
-			elif Input.is_action_just_pressed("jump"):
-				switch_state(STATE.DOUBLE_JUMP)
-			elif Input.is_action_just_pressed("sprint") and can_dash:
-				switch_state(STATE.DASH)
-		
 		STATE.FLOAT:
 			velocity.y = move_toward(velocity.y, FLOAT_VELOCITY, FLOAT_GRAVITY * delta)
 			handle_movement(0, WALK_VELOCITY, FLOAT_ACCELERATION * delta)
-			
 			if is_on_floor():
 				switch_state(STATE.FLOOR)
-			elif Input.is_action_just_released("jump"):
-				float_cooldown.start()
-				switch_state(STATE.FALL)
-			elif is_input_toward_facing() and is_ledge() and is_space():
-				switch_state(STATE.LEDGE_CLIMB)
-			elif is_input_toward_facing() and can_wall_slide():
-				switch_state(STATE.WALL_SLIDE)
-			elif Input.is_action_just_pressed("sprint") and can_dash:
-				switch_state(STATE.DASH)
-		
-		STATE.LEDGE_CLIMB:
-			is_sprinting = Input.is_action_pressed("sprint")
-			if not animated_sprite.is_playing():
-				animated_sprite.play("idle")
-				var offset := ledge_climb_offset()
-				offset.x *= facing_direction
-				position += offset
-				switch_state(STATE.FLOOR)
-			elif Input.is_action_just_pressed("jump"):
-				var progress := inverse_lerp(0, animated_sprite.sprite_frames.get_frame_count("ledge_climb"), animated_sprite.frame)
-				var offset := ledge_climb_offset()
-				offset.x *= facing_direction * progress
-				position += offset
-				switch_state(STATE.LEDGE_JUMP)
-		
-		STATE.WALL_SLIDE:
-			velocity.y = move_toward(velocity.y, WALL_SLIDE_VELOCITY, WALL_SLIDE_GRAVITY * delta)
-			handle_movement()
-			
-			if is_on_floor():
-				switch_state(STATE.FLOOR)
-			elif is_ledge() and is_space():
-				switch_state(STATE.LEDGE_CLIMB)
-			elif not can_wall_slide():
-				switch_state(STATE.FALL)
-			elif Input.is_action_just_pressed("jump"):
-				switch_state(STATE.WALL_JUMP)
-			elif Input.is_action_just_pressed("sprint"):
-				if is_input_toward_facing():
-					switch_state(STATE.WALL_CLIMB)
-				else:
-					set_facing_direction(-facing_direction)
-					switch_state(STATE.DASH)
-		
-		STATE.WALL_CLIMB:
-			var distance := absf(position.y - saved_position.y)
-			if distance >= WALL_CLIMB_LENGTH or is_on_ceiling():
-				velocity.y = 0
-				switch_state(STATE.WALL_SLIDE)
-			elif is_ledge():
-				switch_state(STATE.LEDGE_JUMP)
-		
 		STATE.DASH:
 			velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
-			is_sprinting = Input.is_action_pressed("sprint")
-			dash_cooldown.start()
+			handle_sprint(delta)
 			if is_on_floor():
 				coyote_timer.start()
-			if Input.is_action_just_pressed("jump"):
-				dash_jump_buffer = true
 			var distance := absf(position.x - saved_position.x)
-			if distance >= DASH_LENGTH or signf(get_last_motion().x) != facing_direction:
-				if dash_jump_buffer and coyote_timer.time_left > 0:
-					
-					switch_state(STATE.JUMP)
-				elif is_on_floor():
-					switch_state(STATE.FLOOR)
-				else:
-					switch_state(STATE.FALL)
-			elif is_ledge() and is_space():
-				switch_state(STATE.LEDGE_CLIMB)
-			elif can_wall_slide():
-				switch_state(STATE.WALL_SLIDE)
-		
-		STATE.TURNING:
-			if signf(velocity.x) == facing_direction and is_input_against_facing():
-				set_facing_direction(-facing_direction)
-			handle_sprint(delta)
-			
-			if not is_on_floor():
+			if distance >= DASH_LENGTH:
 				switch_state(STATE.FALL)
-			elif not is_sprinting or velocity.x * facing_direction >= SPRINT_VELOCITY:
-				switch_state(STATE.FLOOR)
-			elif Input.is_action_just_pressed("jump"):
-				animated_sprite.play("double_jump")
-				is_sprinting = false
-				switch_state(STATE.JUMP)
 
+func switch_state(to_state: STATE) -> void:
+	var previous_state := active_state
+	active_state = to_state
+	match active_state:
+		STATE.FALL:
+			if previous_state != STATE.DOUBLE_JUMP:
+				animated_sprite.play("fall")
+			if previous_state == STATE.FLOOR:
+				coyote_timer.start()
+		STATE.FLOOR:
+			can_double_jump = true
+			can_dash = true
+		STATE.JUMP:
+			if previous_state != STATE.TURNING:
+				animated_sprite.play("jump")
+			velocity.y = JUMP_VELOCITY
+			coyote_timer.stop()
+		STATE.DOUBLE_JUMP:
+			animated_sprite.play("double_jump")
+			velocity.y = DOUBLE_JUMP_VELOCITY
+			can_double_jump = false
+			is_sprinting = false
+		STATE.FLOAT:
+			if float_cooldown.time_left > 0:
+				active_state = previous_state
+				return
+			animated_sprite.play("float")
+			velocity.y = 0
+			is_sprinting = false
+		STATE.DASH:
+			if dash_cooldown.time_left > 0:
+				active_state = previous_state
+				return
+			animated_sprite.play("dash")
+			velocity.y = 0
+			set_facing_direction(signf(Input.get_axis("move_left", "move_right")))
+			velocity.x = facing_direction * DASH_VELOCITY
+			saved_position = position
+			can_dash = previous_state in [STATE.FLOOR, STATE.WALL_SLIDE]
+			dash_jump_buffer = false
 
 func handle_movement(input_direction: float = 0, horizontal_velocity: float = WALK_VELOCITY, step: float = WALK_VELOCITY) -> void:
 	if input_direction == 0:
 		input_direction = signf(Input.get_axis("move_left", "move_right"))
-	set_facing_direction(input_direction)
+	if input_direction != 0:
+		set_facing_direction(input_direction)
 	velocity.x = move_toward(velocity.x, input_direction * horizontal_velocity, step)
 
-
 func handle_sprint(delta: float) -> void:
-	handle_movement(facing_direction, SPRINT_VELOCITY, SPRINT_ACCELERATION * delta)
+	var input_dir = signf(Input.get_axis("move_left", "move_right"))
+	if input_dir != 0:
+		set_facing_direction(input_dir)
+	velocity.x = move_toward(velocity.x, input_dir * SPRINT_VELOCITY, SPRINT_ACCELERATION * delta)
 	is_sprinting = Input.is_action_pressed("sprint") and not is_on_wall()
 
-
 func set_facing_direction(direction: float) -> void:
-	if direction:
-		animated_sprite.flip_h = direction < 0
+	if direction != 0:
 		facing_direction = direction
 		ledge_climb_ray_cast.position.x = direction * absf(ledge_climb_ray_cast.position.x)
 		ledge_climb_ray_cast.target_position.x = direction * absf(ledge_climb_ray_cast.target_position.x)
@@ -338,81 +196,89 @@ func set_facing_direction(direction: float) -> void:
 		wall_slide_ray_cast.target_position.x = direction * absf(wall_slide_ray_cast.target_position.x)
 		wall_slide_ray_cast.force_raycast_update()
 
-
-func is_input_toward_facing() -> bool:
-	return signf(Input.get_axis("move_left", "move_right")) == facing_direction
-
-
-func is_input_against_facing() -> bool:
-	return signf(Input.get_axis("move_left", "move_right")) == -facing_direction
-
-
-func is_ledge() -> bool:
-	return is_on_wall_only() and \
-	ledge_climb_ray_cast.is_colliding() and \
-	ledge_climb_ray_cast.get_collision_normal().is_equal_approx(Vector2.UP)
-
-
-func is_space() -> bool:
-	ledge_space_ray_cast.global_position = ledge_climb_ray_cast.get_collision_point()
-	ledge_space_ray_cast.force_raycast_update()
-	return not ledge_space_ray_cast.is_colliding()
-
-
-func ledge_climb_offset() -> Vector2:
-	var shape := player_collider.shape
-	if shape is CapsuleShape2D:
-		return Vector2(shape.radius * 2.0, -shape.height * 0.5)
-	if shape is RectangleShape2D:
-		return Vector2(shape.size.x, -shape.size.y * 0.5)
-	return Vector2.ZERO
-
-
-func can_wall_slide() -> bool:
-	return is_on_wall_only() and wall_slide_ray_cast.is_colliding()
-
-func _process(delta: float) -> void:
-	if is_gun_equipped:
-		if get_global_mouse_position().x < global_position.x:
-			animated_sprite.flip_h = true
-		else:
-			animated_sprite.flip_h = false
-	var in_restricted_state := active_state in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FLOAT]
-
-	if in_restricted_state:
-		if is_gun_equipped:
-			was_gun_equipped_before_restricted = true
-			unequip_gun()
-	else:
-		if was_gun_equipped_before_restricted:
-			equip_gun()
-			was_gun_equipped_before_restricted = false
-	if gun:
-		gun.is_gun_equipped = is_gun_equipped
-
-func _input(event):
-	if event.is_action_pressed("toggle_gun"):
-		toggle_gun()
-
 func toggle_gun():
 	if is_gun_equipped:
 		unequip_gun()
 	else:
 		equip_gun()
 
-func equip_gun():
-	animated_sprite.play("gun_equip")
-	gun.visible = true
+func equip_gun() -> void:
+	if gun:
+		gun.visible = false
+		gun.call("equip")
 	is_gun_equipped = true
-	gun.is_gun_equipped = true
+	is_equipping_gun = true
+	animated_sprite.play("gun_equip")
+	_start_gun_timer()
 
-func unequip_gun():
-	gun.visible = false
+func _start_gun_timer() -> void:
+	var t = Timer.new()
+	t.one_shot = true
+	t.wait_time = 0.9
+	add_child(t)
+	t.start()
+	t.timeout.connect(Callable(self, "_show_gun_after_delay"))
+
+func _show_gun_after_delay() -> void:
+	if gun and is_gun_equipped:
+		gun.visible = true
+
+func unequip_gun() -> void:
+	if gun:
+		gun.call("unequip")
+		gun.visible = false
 	is_gun_equipped = false
-	gun.is_gun_equipped = false
+	is_equipping_gun = false
+	animated_sprite.play("idle")
+
+func _on_animation_finished(anim_name: String) -> void:
+	if anim_name == "gun_equip":
+		animated_sprite.stop()
+		animated_sprite.frame = 1
+		is_equipping_gun = false
 
 func can_player_shoot() -> bool:
-	if active_state in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FALL,]:
-		return false
-	return is_gun_equipped
-	
+	return is_gun_equipped and active_state not in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FALL]
+
+func _process(delta: float) -> void:
+	if in_dialogue:
+		velocity = Vector2.ZERO
+		return
+	if is_gun_equipped:
+		var mouse_global_pos = get_global_mouse_position()
+		var flip = mouse_global_pos.x < global_position.x
+		animated_sprite.flip_h = flip
+		gun.position.x = abs(gun.position.x) * (-1 if flip else 1)
+		gun.rotation_degrees = 0 if not flip else 180
+	else:
+		animated_sprite.flip_h = facing_direction < 0
+	if gun:
+		var in_restricted_state := active_state in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FLOAT]
+		if in_restricted_state and is_gun_equipped:
+			was_gun_equipped_before_restricted = true
+			unequip_gun()
+		elif was_gun_equipped_before_restricted:
+			equip_gun()
+			was_gun_equipped_before_restricted = false
+
+func _input(event):
+	if in_dialogue:
+		return
+	if event.is_action_pressed("toggle_gun"):
+		toggle_gun()
+
+func set_camera_limits():
+	var limits_node = get_tree().current_scene.get_node_or_null("CameraLimits")
+	if limits_node:
+		camera_2d.limit_left = limits_node.left_limit
+		camera_2d.limit_right = limits_node.right_limit
+		camera_2d.limit_top = limits_node.top_limit
+		camera_2d.limit_bottom = limits_node.bottom_limit
+
+func start_dialogue():
+	in_dialogue = true
+	velocity = Vector2.ZERO
+	animated_sprite.play("idle")
+
+func end_dialogue():
+	in_dialogue = false

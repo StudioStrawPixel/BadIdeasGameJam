@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://7n8oulgl1q1h"]
+
+[ext_resource type="Script" uid="uid://cajr21lkq6qp1" path="res://assets/scripts/left_boundry.gd" id="1_5u2yq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73xse"]
+size = Vector2(1710, 4039.5)
+
+[node name="Left Boundry" type="Area2D"]
+script = ExtResource("1_5u2yq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-62, 3012.75)
+shape = SubResource("RectangleShape2D_73xse")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

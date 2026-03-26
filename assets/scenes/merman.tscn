@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dw8h4o41xvjhn"]
+
+[ext_resource type="Texture2D" uid="uid://c5c0jdt67to8l" path="res://assets/art/characters/MERMAN1.png" id="1_onjv6"]
+[ext_resource type="Script" uid="uid://ce0xjsk4jwg8a" path="res://assets/scripts/merman.gd" id="1_qkach"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkach"]
+atlas = ExtResource("1_onjv6")
+region = Rect2(48, 0, 1286, 2160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epfd3"]
+atlas = ExtResource("1_onjv6")
+region = Rect2(1334, 0, 1286, 2160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ndwdh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkach")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epfd3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[node name="merman" type="Area2D"]
+script = ExtResource("1_qkach")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(116.49998, 0.25)
+scale = Vector2(0.40357697, 0.37708336)
+sprite_frames = SubResource("SpriteFrames_ndwdh")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.3202305
+
+[node name="MermanCollision" type="CollisionShape2D" parent="."]

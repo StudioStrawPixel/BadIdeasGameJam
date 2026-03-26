@@ -2,7 +2,7 @@
 "@path": "res://addons/dialogic/Resources/character.gd",
 "@subpath": NodePath(""),
 &"_translation_id": "",
-&"color": Color(1, 1, 1, 1),
+&"color": Color(0.023281487, 0.0234375, 0.023254395, 1),
 &"custom_info": {
 "prefix": "",
 "sound_mood_default": "",
@@ -12,7 +12,7 @@
 },
 &"default_portrait": "",
 &"description": "",
-&"display_name": "Glorb",
+&"display_name": "Glorp",
 &"mirror": false,
 &"nicknames": [""],
 &"offset": Vector2(0, 0),

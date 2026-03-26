@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://2yabcneqsuro"]
+
+[ext_resource type="Script" uid="uid://dlca25g2i8vam" path="res://assets/scripts/fade.gd" id="1_bg7ga"]
+
+[node name="Fade" type="CanvasLayer"]
+script = ExtResource("1_bg7ga")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11173.0
+offset_top = -2284.0
+offset_right = 6625.0
+offset_bottom = 3315.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
