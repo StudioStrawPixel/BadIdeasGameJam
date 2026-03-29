@@ -46,6 +46,8 @@ const SPRINT_ACCELERATION := 3800.0
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var gun: Sprite2D = $Gun
 @onready var camera_2d: Camera2D = $CameraOffset/Camera2D
+@onready var footstep_audio: AudioStreamPlayer2D = $Footsteps
+
 
 var active_state := STATE.FALL
 var can_double_jump := false
@@ -63,6 +65,7 @@ var is_slide_locked := false
 var slide_lock_timer: Timer
 var gun_show_timer: Timer
 var gun_unlocked: bool = false
+var can_play_footsteps: bool = false
 
 func _ready() -> void:
 	switch_state(active_state)
@@ -207,15 +210,27 @@ func handle_movement(input_direction: float = 0, horizontal_velocity: float = WA
 		return
 	if input_direction == 0:
 		input_direction = signf(Input.get_axis("move_left", "move_right"))
+	var target_velocity = input_direction * horizontal_velocity
+	velocity.x = move_toward(velocity.x, target_velocity, step)
 	if input_direction != 0:
 		set_facing_direction(input_direction)
-	velocity.x = move_toward(velocity.x, input_direction * horizontal_velocity, step)
-
+		if can_play_footsteps and not footstep_audio.playing and is_on_floor():
+			footstep_audio.play()
+	else:
+		if footstep_audio.playing:
+			footstep_audio.stop()
+			
 func handle_sprint(delta: float) -> void:
 	var input_dir = signf(Input.get_axis("move_left", "move_right"))
 	if input_dir != 0:
 		set_facing_direction(input_dir)
-	velocity.x = move_toward(velocity.x, input_dir * SPRINT_VELOCITY, SPRINT_ACCELERATION * delta)
+		velocity.x = move_toward(velocity.x, input_dir * SPRINT_VELOCITY, SPRINT_ACCELERATION * delta)
+		if can_play_footsteps and not footstep_audio.playing and is_on_floor():
+			footstep_audio.pitch_scale = 1.5
+			footstep_audio.play()
+	else:
+		if footstep_audio.playing:
+			footstep_audio.stop()
 	is_sprinting = Input.is_action_pressed("sprint") and not is_on_wall()
 
 func set_facing_direction(direction: float) -> void:

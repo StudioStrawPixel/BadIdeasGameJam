@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://da84ajuoi0pue"]
+[gd_scene load_steps=40 format=3 uid="uid://da84ajuoi0pue"]
 
 [ext_resource type="Script" uid="uid://b2bk35y1vvgp1" path="res://assets/scripts/game.gd" id="1_0nt35"]
 [ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="2_jm60u"]
@@ -13,10 +13,13 @@
 [ext_resource type="Texture2D" uid="uid://sie32ehhcdse" path="res://assets/art/Background and Decor/forest ground.png" id="14_oi8b3"]
 [ext_resource type="Texture2D" uid="uid://cx3dri212bmlr" path="res://assets/art/Background and Decor/Big Tree/tree2.png" id="15_qbana"]
 [ext_resource type="Texture2D" uid="uid://u6txcmo7hcvx" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Ground.png" id="15_r7qpo"]
+[ext_resource type="Texture2D" uid="uid://de4iofo7q8scr" path="res://assets/art/characters/humanpng.png" id="18_7ld16"]
 [ext_resource type="Script" uid="uid://cotwbkdn5vhdd" path="res://assets/scenes/levels/camera_limits.gd" id="18_oi8b3"]
-[ext_resource type="Texture2D" uid="uid://bspltuciavelp" path="res://assets/art/characters/mokeyall.png" id="18_r7qpo"]
 [ext_resource type="Texture2D" uid="uid://crkuaj2jgc1h3" path="res://assets/art/Background and Decor/glorp bush.png" id="19_a3io4"]
+[ext_resource type="Texture2D" uid="uid://b0k0yie7s7h0x" path="res://assets/art/characters/humanpngmirrored.png" id="19_texi3"]
 [ext_resource type="AudioStream" uid="uid://0c8ydwl34b8s" path="res://assets/sounds/Castle Song.mp3" id="20_a3io4"]
+[ext_resource type="Texture2D" uid="uid://bpu1j781ghwuk" path="res://assets/art/2d/items/box.png" id="20_p3ih3"]
+[ext_resource type="PackedScene" uid="uid://bvfahctmyvooj" path="res://assets/scenes/tutorial_window.tscn" id="21_7ld16"]
 [ext_resource type="PackedScene" uid="uid://7n8oulgl1q1h" path="res://assets/scenes/left_boundry.tscn" id="23_texi3"]
 [ext_resource type="PackedScene" uid="uid://3be3phhcmcti" path="res://assets/scenes/rightboundry_start.tscn" id="24_p3ih3"]
 [ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="25_gbp6d"]
@@ -36,29 +39,63 @@ texture = ExtResource("4_4pjnc")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_snkx0")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7ld16"]
-atlas = ExtResource("18_r7qpo")
-region = Rect2(1814, 1069, 491, 1069)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbana"]
+atlas = ExtResource("18_7ld16")
+region = Rect2(1536, 0, 768, 540)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a3io4"]
-atlas = ExtResource("18_r7qpo")
-region = Rect2(1303, 1040, 447, 1040)
+[sub_resource type="AtlasTexture" id="AtlasTexture_18sfs"]
+atlas = ExtResource("18_7ld16")
+region = Rect2(1536, 540, 768, 540)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_imqpt"]
-atlas = ExtResource("18_r7qpo")
-region = Rect2(1750, 1040, 447, 1040)
+atlas = ExtResource("18_7ld16")
+region = Rect2(688, 540, 344, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_texi3"]
+atlas = ExtResource("18_7ld16")
+region = Rect2(1032, 540, 344, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3ih3"]
+atlas = ExtResource("18_7ld16")
+region = Rect2(1032, 0, 344, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbp6d"]
+atlas = ExtResource("18_7ld16")
+region = Rect2(688, 0, 344, 540)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx1da"]
+atlas = ExtResource("19_texi3")
+region = Rect2(2443, 1078, 349, 539)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnptk"]
+atlas = ExtResource("19_texi3")
+region = Rect2(2792, 1078, 349, 539)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_imqpt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7ld16")
+"texture": SubResource("AtlasTexture_qbana")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7ld16")
+"texture": SubResource("AtlasTexture_18sfs")
+}],
+"loop": true,
+"name": &"boxpickup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imqpt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7ld16")
+"texture": SubResource("AtlasTexture_texi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3ih3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbp6d")
 }],
 "loop": true,
 "name": &"humanwalk",
@@ -66,13 +103,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a3io4")
+"texture": SubResource("AtlasTexture_nx1da")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_imqpt")
+"texture": SubResource("AtlasTexture_pnptk")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"humanwalkaway",
 "speed": 5.0
 }]
 
@@ -126,9 +163,46 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Box:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AnimatedSprite2D:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"humanwalk"]
+}
 
 [sub_resource type="Animation" id="Animation_7ld16"]
 resource_name = "glorphide"
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -153,45 +227,41 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true]
 }
-
-[sub_resource type="Animation" id="Animation_r7qpo"]
-resource_name = "humanwalkout"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.8333334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-2656.0005, 217), Vector2(-1085.0001, 217)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.27),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Player:visible")
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Box:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [&"boxpickup"]
 }
 
 [sub_resource type="Animation" id="Animation_texi3"]
@@ -244,6 +314,94 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.33333334, 0.48333335, 0.6333334, 0.7833334, 0.90000004, 1.0500001, 1.3000001, 1.45, 1.6333334, 1.7833334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimatedSprite2D:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"humanwalkaway"]
+}
+
+[sub_resource type="Animation" id="Animation_r7qpo"]
+resource_name = "humanwalkout"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-2656.0005, 217), Vector2(-1085.0001, 217)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.27),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Player:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.44, 0.64, 0.8000001, 1.0000001, 1.1333334, 1.3333335, 1.5333334, 1.7333335, 1.9333334, 2.1333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"humanwalk"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ld16"]
@@ -397,9 +555,9 @@ bottom_limit = 550
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Human"]
 visible = false
 position = Vector2(-2656.0005, 217)
-scale = Vector2(0.7382892, 0.7142189)
+scale = Vector2(1.1972334, 1.1758295)
 sprite_frames = SubResource("SpriteFrames_imqpt")
-animation = &"new_animation"
+animation = &"humanwalk"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Human"]
 libraries = {
@@ -408,6 +566,11 @@ libraries = {
 
 [node name="humanbubble" type="Marker2D" parent="Human"]
 position = Vector2(-994, -36)
+
+[node name="Box" type="Sprite2D" parent="Human"]
+position = Vector2(-1079, 395.00003)
+scale = Vector2(1.192, 1.162)
+texture = ExtResource("20_p3ih3")
 
 [node name="GlorpBush" type="Sprite2D" parent="."]
 visible = false
@@ -420,3 +583,6 @@ stream = ExtResource("20_a3io4")
 volume_db = -20.0
 pitch_scale = 1.72
 autoplay = true
+parameters/looping = false
+
+[node name="Tutorial Window" parent="." instance=ExtResource("21_7ld16")]

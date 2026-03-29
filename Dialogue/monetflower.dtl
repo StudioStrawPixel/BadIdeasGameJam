@@ -1,5 +1,29 @@
-monet: Yay!
-monet: sadfdfhdfgd
-monet: safsdfsadfdg
-monet: adrsgfasgdfhdfg
+monet: [mood=yes] Yay!
+monet: [mood=yes] I can finally eat my banana!
+monet: ...
+monet: [mood=yes] Oh hello there, you must have helped me get that box off my head.
+monet: [mood=yes] My name is Monet!
+glorb: [mood=yes] Hello Monet, my name is Glorp.
+glorb: [mood=yes] Short for Glorplievious Renold the Third.
+monet: [mood=yes] Um... I think "Glorp" is enough.
+glorb: [mood=yes] Fair...
+glorb: [mood=yes] Anyways, I need your help.
+glorb: [mood=yes] Have you seen more of these boxes around?
+monet: [mood=yes] Yes I have!
+glorb: ...
+monet: ...
+glorb: [mood=yes] Are you going to say where?
+monet: [mood=yes] Why all around us!
+monet: [mood=yes] They have completely taken over the forest!
+glorb: [mood=yes] Oh.... It might be harder to find my brother than I thought.
+monet: [mood=yes] Brother?
+glorb: [mood=yes] Yes, I was trapped in a box like that.
+glorb: [mood=yes] So I think my brother is in one as well somewhere...
+monet: [mood=yes] You know...
+monet: [mood=yes] Right before this box landed on my head, I heard it [color=#52b35c]rustling in the wind [/color]
+monet: [mood=yes] Maybe if you listen closely you can find boxes easier!
+audio "res://assets/sounds/benkirb-shine-1-268902.mp3" [volume="-15.0"]
+glorb: [font_size=30] [color=#52b35c] GLORP LEARNED\: WIND AND MOVEMENT [/color] [/font_size]
+glorb: [mood=yes] Thank you Monet!
+glorb: [mood=yes] I am going to go find my brother now! Goodbye!
 [end_timeline]

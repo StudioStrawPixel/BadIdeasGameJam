@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dulqeu7l2a5h4"]
+[gd_scene load_steps=25 format=3 uid="uid://dulqeu7l2a5h4"]
 
 [ext_resource type="Script" uid="uid://df3jc67qtrd1t" path="res://assets/scripts/monet.gd" id="1_pxvrf"]
 [ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="2_l1rhi"]
@@ -11,10 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://dbjqdq02j6804" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_tree3.png" id="10_a67ri"]
 [ext_resource type="Texture2D" uid="uid://dcaf1j5k4ywra" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_top2.png" id="11_eablm"]
 [ext_resource type="Texture2D" uid="uid://djhg1ab3h40w6" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_top4.png" id="12_6247m"]
+[ext_resource type="Texture2D" uid="uid://sie32ehhcdse" path="res://assets/art/Background and Decor/forest ground.png" id="13_js0oi"]
+[ext_resource type="Texture2D" uid="uid://cxppa21wq7x4g" path="res://assets/art/Background and Decor/Fantasy Forest 1/stone4.png" id="13_rtwwo"]
+[ext_resource type="Texture2D" uid="uid://u6txcmo7hcvx" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Ground.png" id="14_rtwwo"]
 [ext_resource type="PackedScene" uid="uid://butmkyyg0eaby" path="res://assets/scenes/monetmonkey.tscn" id="15_m42h5"]
 [ext_resource type="AudioStream" uid="uid://c0kimmsrevp7i" path="res://assets/sounds/viacheslavstarostin-comedy-funny-cartoon-background-music-346752.mp3" id="16_w1dnl"]
 [ext_resource type="Texture2D" uid="uid://7gsynks71xbk" path="res://assets/art/Background and Decor/Fantasy Forest 1/grass1.png" id="18_73oqf"]
+[ext_resource type="Script" uid="uid://cotwbkdn5vhdd" path="res://assets/scenes/levels/camera_limits.gd" id="20_pxvrf"]
 [ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="21_axqxr"]
+[ext_resource type="PackedScene" uid="uid://bvfahctmyvooj" path="res://assets/scenes/tutorial_window.tscn" id="21_vlwk8"]
 [ext_resource type="PackedScene" uid="uid://7n8oulgl1q1h" path="res://assets/scenes/left_boundry.tscn" id="23_3agxk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_snkx0"]
@@ -40,7 +45,7 @@ script = ExtResource("1_pxvrf")
 
 [node name="Player" parent="." instance=ExtResource("2_l1rhi")]
 z_index = 1
-position = Vector2(-1504, 471)
+position = Vector2(-1430, 416)
 
 [node name="bubble" type="Marker2D" parent="Player"]
 position = Vector2(77, -459)
@@ -131,6 +136,16 @@ z_index = -10
 
 [node name="0" type="Node2D" parent="BackgroundDecor"]
 
+[node name="Stone4" type="Sprite2D" parent="BackgroundDecor/0"]
+position = Vector2(1582.9999, 306)
+scale = Vector2(3.5517242, 3.5921052)
+texture = ExtResource("13_rtwwo")
+
+[node name="ForestGround" type="Sprite2D" parent="BackgroundDecor/0"]
+position = Vector2(644, 90)
+scale = Vector2(1.8054688, 1)
+texture = ExtResource("13_js0oi")
+
 [node name="1" type="Node2D" parent="BackgroundDecor"]
 z_index = 10
 
@@ -145,13 +160,23 @@ z_index = 20
 [node name="3" type="Node2D" parent="BackgroundDecor"]
 z_index = 30
 
+[node name="Ground" type="Sprite2D" parent="BackgroundDecor/3"]
+position = Vector2(-1268.0001, 7)
+scale = Vector2(2.9442708, 0.9259259)
+texture = ExtResource("14_rtwwo")
+
+[node name="Ground2" type="Sprite2D" parent="BackgroundDecor/3"]
+position = Vector2(3021.5, -76.35367)
+scale = Vector2(2.6922097, 1.0697154)
+texture = ExtResource("14_rtwwo")
+
 [node name="Left Boundry" parent="." instance=ExtResource("23_3agxk")]
 position = Vector2(-2493, -3327)
 
 [node name="Fade" parent="." instance=ExtResource("21_axqxr")]
 
 [node name="Monkey" parent="." instance=ExtResource("15_m42h5")]
-position = Vector2(1607, 182)
+position = Vector2(1538, 21)
 
 [node name="monetbubble2" type="Marker2D" parent="Monkey"]
 position = Vector2(5, -158)
@@ -168,5 +193,28 @@ shape = SubResource("RectangleShape2D_m42h5")
 stream = ExtResource("16_w1dnl")
 volume_db = -15.0
 autoplay = true
+max_distance = 4096.0
+parameters/looping = false
+
+[node name="CameraLimits" type="Node2D" parent="."]
+script = ExtResource("20_pxvrf")
+left_limit = -2000
+right_limit = 3250
+top_limit = -1500
+bottom_limit = 550
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(750, 500)
+scale = Vector2(0.37, 0.37)
+transform = Transform2D(0.37, 0, 0, 0.37, 750, 500)
+
+[node name="Tutorial Window" parent="CanvasLayer" instance=ExtResource("21_vlwk8")]
+anchors_preset = -1
+anchor_top = -2.5560002
+anchor_bottom = -2.5560002
+offset_left = 1106.0
+offset_top = -21.67981
+offset_right = 1106.0
+offset_bottom = -21.67981
 
 [connection signal="body_entered" from="Monetcutscene" to="." method="_on_monetcutscene_body_entered"]
