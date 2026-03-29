@@ -48,7 +48,6 @@ const SPRINT_ACCELERATION := 3800.0
 @onready var camera_2d: Camera2D = $CameraOffset/Camera2D
 @onready var footstep_audio: AudioStreamPlayer2D = $Footsteps
 
-
 var active_state := STATE.FALL
 var can_double_jump := false
 var facing_direction := 1.0
@@ -84,7 +83,6 @@ func _ready() -> void:
 	gun_show_timer.timeout.connect(_show_gun_after_delay)
 	add_child(gun_show_timer)
 	set_camera_limits()
-	camera_2d.make_current()
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
@@ -219,7 +217,7 @@ func handle_movement(input_direction: float = 0, horizontal_velocity: float = WA
 	else:
 		if footstep_audio.playing:
 			footstep_audio.stop()
-			
+
 func handle_sprint(delta: float) -> void:
 	var input_dir = signf(Input.get_axis("move_left", "move_right"))
 	if input_dir != 0:
@@ -323,9 +321,11 @@ func _input(event):
 	if event.is_action_pressed("toggle_gun"):
 		toggle_gun()
 
-func set_camera_limits():
-	var limits_node = get_tree().current_scene.get_node_or_null("CameraLimits")
-	if limits_node:
+func set_camera_limits(limits_node: Node = null):
+	if not limits_node:
+		limits_node = get_tree().current_scene.get_node_or_null("CameraLimits")
+	if camera_2d and limits_node:
+		camera_2d.make_current()
 		camera_2d.limit_left = limits_node.left_limit
 		camera_2d.limit_right = limits_node.right_limit
 		camera_2d.limit_top = limits_node.top_limit

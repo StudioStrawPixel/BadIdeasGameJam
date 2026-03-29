@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://b4e5q527vbbg6"]
+[gd_scene load_steps=4 format=3 uid="uid://b4e5q527vbbg6"]
+
+[ext_resource type="VideoStream" uid="uid://cinpnx1ak64nh" path="res://assets/art/anims/finalopeninganim.ogv" id="1_2epgq"]
+[ext_resource type="Script" uid="uid://cv4w4ip3ldqol" path="res://opening_animation.gd" id="1_wx8i6"]
+[ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="3_s3m5x"]
 
 [node name="OpeningAnimation" type="Control"]
 layout_mode = 3
@@ -7,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wx8i6")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 1
@@ -15,5 +20,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stream = ExtResource("1_2epgq")
 autoplay = true
 expand = true
+
+[node name="Fade" parent="." instance=ExtResource("3_s3m5x")]

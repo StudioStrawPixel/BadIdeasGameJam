@@ -7,11 +7,24 @@ extends Node2D
 @onready var monet: AnimatedSprite2D = $Monkey/Monet
 @onready var smoke: GPUParticles2D = $Monkey/Smoke
 @onready var tutorial: Control = $"CanvasLayer/Tutorial Window"
+@onready var fade_layer: CanvasLayer = $Fade
+@onready var music_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var camera_limits: Node = $CameraLimits
 
 var triggered := false
 
 func _ready():
-	$Fade.fade(0.0, 1.5)
+	if player and camera_limits:
+		player.set_camera_limits(camera_limits)
+	fade_layer.color_rect.color.a = 1.0
+	var tween = fade_layer.fade(0.0, 1.5)
+	tween.finished.connect(_start_scene)
+	if not music_player.playing:
+		music_player.play()
+
+func _start_scene():
+	player.set_process(true)
+	player.set_physics_process(true)
 
 func _on_monetcutscene_body_entered(body: Node2D) -> void:
 	if body == player and not triggered:
