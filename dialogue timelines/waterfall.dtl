@@ -1,0 +1,8 @@
+glorb: [mood=yes] This air is vile.
+glorb: [mood=yes] I can't walk through this in this state...
+glorb: [mood=yes] I need to do something so I can cross this stream.
+unknown: [mood=yes] Help!!! I can't see and my beautiful hair is being ruined!
+audio "res://assets/sounds/shock.mp3" [volume="-5.0"]
+glorb: !!!
+glorb: [mood=yes] Oh no someone is in there! I hope it isn't Glep!
+[end_timeline]

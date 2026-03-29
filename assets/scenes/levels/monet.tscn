@@ -15,14 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://cxppa21wq7x4g" path="res://assets/art/Background and Decor/Fantasy Forest 1/stone4.png" id="13_rtwwo"]
 [ext_resource type="Texture2D" uid="uid://u6txcmo7hcvx" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Ground.png" id="14_rtwwo"]
 [ext_resource type="PackedScene" uid="uid://butmkyyg0eaby" path="res://assets/scenes/monetmonkey.tscn" id="15_m42h5"]
-[ext_resource type="AudioStream" uid="uid://c0kimmsrevp7i" path="res://assets/sounds/viacheslavstarostin-comedy-funny-cartoon-background-music-346752.mp3" id="16_w1dnl"]
-[ext_resource type="Texture2D" uid="uid://7gsynks71xbk" path="res://assets/art/Background and Decor/Fantasy Forest 1/grass1.png" id="18_73oqf"]
+[ext_resource type="AudioStream" uid="uid://c0kimmsrevp7i" path="res://assets/sounds/funnymusic.mp3" id="16_w1dnl"]
 [ext_resource type="Script" uid="uid://cotwbkdn5vhdd" path="res://assets/scenes/levels/camera_limits.gd" id="20_pxvrf"]
 [ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="21_axqxr"]
 [ext_resource type="PackedScene" uid="uid://bvfahctmyvooj" path="res://assets/scenes/tutorial_window.tscn" id="21_vlwk8"]
 [ext_resource type="PackedScene" uid="uid://7n8oulgl1q1h" path="res://assets/scenes/left_boundry.tscn" id="23_3agxk"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_snkx0"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_axqxr"]
 texture = ExtResource("4_5nlxu")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -35,17 +34,20 @@ texture = ExtResource("4_5nlxu")
 
 [sub_resource type="TileSet" id="TileSet_i66uq"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_snkx0")
+sources/0 = SubResource("TileSetAtlasSource_axqxr")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m42h5"]
 size = Vector2(317.6072, 2545.8423)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axqxr"]
+size = Vector2(1364.5, 2323)
 
 [node name="Monet" type="Node2D"]
 script = ExtResource("1_pxvrf")
 
 [node name="Player" parent="." instance=ExtResource("2_l1rhi")]
 z_index = 1
-position = Vector2(-1430, 416)
+position = Vector2(-1448, 503)
 
 [node name="bubble" type="Marker2D" parent="Player"]
 position = Vector2(77, -459)
@@ -149,11 +151,6 @@ texture = ExtResource("13_js0oi")
 [node name="1" type="Node2D" parent="BackgroundDecor"]
 z_index = 10
 
-[node name="Grass1" type="Sprite2D" parent="BackgroundDecor/1"]
-position = Vector2(-1753, 547.00006)
-scale = Vector2(5.1923075, 5.314815)
-texture = ExtResource("18_73oqf")
-
 [node name="2" type="Node2D" parent="BackgroundDecor"]
 z_index = 20
 
@@ -174,6 +171,7 @@ texture = ExtResource("14_rtwwo")
 position = Vector2(-2493, -3327)
 
 [node name="Fade" parent="." instance=ExtResource("21_axqxr")]
+visible = false
 
 [node name="Monkey" parent="." instance=ExtResource("15_m42h5")]
 position = Vector2(1538, 21)
@@ -215,5 +213,14 @@ offset_left = 1106.0
 offset_top = -21.67981
 offset_right = 1106.0
 offset_bottom = -21.67981
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(2346, -1983)
+
+[node name="rightmonet" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1158.25, 1498.5)
+shape = SubResource("RectangleShape2D_axqxr")
 
 [connection signal="body_entered" from="Monetcutscene" to="." method="_on_monetcutscene_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

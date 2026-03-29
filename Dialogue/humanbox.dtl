@@ -1,5 +1,5 @@
 human: [mood=yes] Oh dear… This has to stop happening...
-audio "res://assets/sounds/benkirb-shine-1-268902.mp3" [volume="-5.0"]
+audio "res://assets/sounds/learn.mp3" [volume="-5.0"]
 glorb: [font_size=30] [color=#52b35c] GLORP LEARNED\: COMMUNICATION  [/color] [/font_size]
 glorb: [i] This must be the frequency of speech on this planet, now I can properly communicate. [/i]
 human: [mood=yes]Ever since the [color=#52b35c]box manufacturing plant[/color] opened at the far edge of the forest, the forest has not been the same…

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Bad Ideas Game Jame 2026"
-run/main_scene="uid://b4e5q527vbbg6"
+run/main_scene="uid://bbf5e7d6sf2ee"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,20 +23,24 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 [dialogic]
 
 directories/dch_directory={
+"farquid": "res://Dialogue/farquid.dch",
 "glorb": "res://Dialogue/glorb.dch",
 "human": "res://Dialogue/human.dch",
 "humannosound": "res://Dialogue/humannosound.dch",
 "monet": "res://Dialogue/monet.dch",
-"unit_test_character": "res://Tests/Resources/unit_test_character.dch"
+"unit_test_character": "res://Tests/Resources/unit_test_character.dch",
+"unknown": "res://Dialogue/unknown.dch"
 }
 directories/dtl_directory={
+"farquidhelp": "res://Dialogue/farquidhelp.dtl",
 "humanbox": "res://Dialogue/humanbox.dtl",
 "humanendtimeline": "res://Dialogue/humanendtimeline.dtl",
 "left bounds": "res://dialogue timelines/left bounds.dtl",
 "meetmonet": "res://Dialogue/meetmonet.dtl",
 "monetflower": "res://Dialogue/monetflower.dtl",
 "startgame": "res://dialogue timelines/startgame.dtl",
-"startgame2": "res://Dialogue/startgame2.dtl"
+"startgame2": "res://Dialogue/startgame2.dtl",
+"waterfall": "res://dialogue timelines/waterfall.dtl"
 }
 layout/style_directory={
 "": "res://textboxstyle.tres",

@@ -1,0 +1,18 @@
+audio "res://assets/sounds/farquid.mp3" [volume="-1.0"]
+unknown: [mood=yes] ...
+unknown: [mood=yes] Oh yesss! Now that the water is clean my hair is STUNNING!
+unknown: [mood=yes] I can finally hear my beautiful stream now that nasty sludge is gone.
+audio "res://assets/sounds/learn.mp3" [volume="-5.0"]
+glorb: [font_size=30] [color=#52b35c] GLORP LEARNED\: WATER  [/color] [/font_size]
+unknown: [mood=yes] Thank you so much you little cutie pie~
+glorb: [mood=yes] I don't know what "cutie pie" means, but you can call me Glorplievious Renold the Third.
+unknown: ...
+unknown: [mood=yes] I think I will just stick to Cutie Pie for you darlin'
+glorb: ...
+glorb: [mood=yes] And you are?
+unknown: [mood=yes] OH MY GOODNESS! How rude of me!!!
+unknown: [mood=yes] My name is Farquid, diva of the dive. ~
+glorb: [mood=yes] Hi Farquid, maybe you know where my brother is?
+farquid: [mood=yes] Sorry cutie pie. I could not see a thing in that sludge.
+farquid: [mood=yes] Maybe you should have a little [color=#52b35c]chit-chat with the birds[/color] a little deeper in the forest.~
+farquid: [mood=yes] They know everything. They are my #1 source for gossip around here.

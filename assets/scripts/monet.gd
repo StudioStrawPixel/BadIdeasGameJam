@@ -69,3 +69,9 @@ func wait_for_monetnobox_and_smoke() -> void:
 func _on_tutorial_done():
 	player.set_process(true)
 	player.set_physics_process(true)
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		await fade_layer.fade(0.0, 1.5).finished
+		get_tree().change_scene_to_file("res://assets/scenes/levels/farquid.tscn")

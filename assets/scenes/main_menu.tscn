@@ -1,6 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbf5e7d6sf2ee"]
+[gd_scene load_steps=11 format=3 uid="uid://bbf5e7d6sf2ee"]
 
-[ext_resource type="FontFile" uid="uid://coxtc6pten3o1" path="res://assets/art/2d/text boxes/monogram.ttf" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://g2hjq2ovl2gf" path="res://assets/scripts/main_menu.gd" id="1_obrqb"]
+[ext_resource type="Shader" uid="uid://dfcufwx2by160" path="res://assets/scenes/scroll.gdshader" id="2_v1ppo"]
+[ext_resource type="FontFile" uid="uid://7fmgxrcuswm6" path="res://assets/art/2d/text boxes/HugMeTight-GzZq.ttf" id="3_obrqb"]
+[ext_resource type="AudioStream" uid="uid://c0kimmsrevp7i" path="res://assets/sounds/funnymusic.mp3" id="4_57ux2"]
+[ext_resource type="Script" uid="uid://cfhq3314spclq" path="res://assets/scenes/audio_control.gd" id="5_f2xsc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_obrqb"]
+shader = ExtResource("2_v1ppo")
+shader_parameter/speed = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rhts7"]
 bg_color = Color(1, 1, 1, 1)
@@ -12,6 +20,18 @@ shadow_color = Color(0, 0, 0, 0.43529412)
 shadow_size = 5
 shadow_offset = Vector2(0, 8)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_57ux2"]
+color = Color(1, 1, 1, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_f2xsc"]
+color = Color(0.32941177, 0.6313726, 0.4, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_v71do"]
+color = Color(0.32941177, 0.6313726, 0.4, 1)
+thickness = 8
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -19,6 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_obrqb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -28,36 +49,139 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -163.75
-offset_top = -118.75
-offset_right = 163.75
-offset_bottom = 118.75
+offset_top = -60.0
+offset_right = 163.74915
+offset_bottom = 177.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -4
+layout_mode = 0
+offset_right = 1274.0
+offset_bottom = 709.0
+color = Color(0.5758153, 0.7731134, 0.59597266, 1)
+
+[node name="Pattern" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_obrqb")
+layout_mode = 0
+offset_right = 1274.0
+offset_bottom = 708.0
+
+[node name="StartGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 220.0
+offset_right = 900.0
+offset_bottom = 350.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_fonts/font = ExtResource("3_obrqb")
 theme_override_font_sizes/font_size = 46
 theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
 text = "Start Game"
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Options" type="Button" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 360.0
+offset_right = 900.0
+offset_bottom = 490.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_fonts/font = ExtResource("3_obrqb")
 theme_override_font_sizes/font_size = 46
 theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
 text = "Options"
 
-[node name="Button3" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 500.0
+offset_right = 900.0
+offset_bottom = 630.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_fonts/font = ExtResource("3_obrqb")
 theme_override_font_sizes/font_size = 46
 theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
 text = "Exit"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_57ux2")
+volume_db = -10.0
+autoplay = true
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 57.0
+offset_right = 1126.0
+offset_bottom = 204.0
+theme_override_fonts/font = ExtResource("3_obrqb")
+theme_override_font_sizes/font_size = 100
+text = "TITLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsScreen" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -442.5
+offset_top = -252.5
+offset_right = 442.5
+offset_bottom = 252.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="OptionsScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -442.75
+offset_right = 442.75
+offset_bottom = 59.5
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_obrqb")
+theme_override_font_sizes/font_size = 50
+text = "Options"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="OptionsScreen"]
+layout_mode = 0
+offset_left = 632.5
+offset_top = 420.5
+offset_right = 867.5
+offset_bottom = 488.5
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_obrqb")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
+text = "Back"
+
+[node name="AudioControl" type="HSlider" parent="OptionsScreen"]
+layout_mode = 0
+offset_left = 141.5
+offset_top = 113.5
+offset_right = 726.5
+offset_bottom = 215.0
+theme_override_styles/slider = SubResource("StyleBoxLine_57ux2")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_f2xsc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_v71do")
+min_value = -50.0
+max_value = 0.0
+script = ExtResource("5_f2xsc")
+audio_bus_name = "Master"
+
+[connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="OptionsScreen/Back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="OptionsScreen/AudioControl" to="OptionsScreen/AudioControl" method="_on_value_changed"]

@@ -22,7 +22,7 @@ glorb: [mood=yes] So I think my brother is in one as well somewhere...
 monet: [mood=yes] You know...
 monet: [mood=yes] Right before this box landed on my head, I heard it [color=#52b35c]rustling in the wind [/color]
 monet: [mood=yes] Maybe if you listen closely you can find boxes easier!
-audio "res://assets/sounds/benkirb-shine-1-268902.mp3" [volume="-15.0"]
+audio "res://assets/sounds/learn.mp3" [volume="-15.0"]
 glorb: [font_size=30] [color=#52b35c] GLORP LEARNED\: WIND AND MOVEMENT [/color] [/font_size]
 glorb: [mood=yes] Thank you Monet!
 glorb: [mood=yes] I am going to go find my brother now! Goodbye!

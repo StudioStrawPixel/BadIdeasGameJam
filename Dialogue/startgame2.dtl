@@ -1,4 +1,4 @@
-audio "res://assets/sounds/benkirb-shine-8-268901.mp3" [volume="-5.0"]
+audio "res://assets/sounds/shock.mp3" [volume="-5.0"]
 glorb: !!!
 glorb: [i] I need to hide! [/i]
 [end_timeline]
