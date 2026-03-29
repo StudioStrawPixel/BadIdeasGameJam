@@ -4,7 +4,7 @@ extends CanvasLayer
 
 func _ready() -> void:
 	color_rect.color.a = 1.0
-	fade(0.0, 1.5) # fade in when scene starts
+	fade(0.0, 1.5)
 
 func fade(target_alpha: float, duration: float = 1.0):
 	var tween = create_tween()

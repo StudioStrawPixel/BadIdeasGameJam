@@ -24,11 +24,19 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={
 "glorb": "res://Dialogue/glorb.dch",
+"human": "res://Dialogue/human.dch",
+"humannosound": "res://Dialogue/humannosound.dch",
+"monet": "res://Dialogue/monet.dch",
 "unit_test_character": "res://Tests/Resources/unit_test_character.dch"
 }
 directories/dtl_directory={
+"humanbox": "res://Dialogue/humanbox.dtl",
+"humanendtimeline": "res://Dialogue/humanendtimeline.dtl",
 "left bounds": "res://dialogue timelines/left bounds.dtl",
-"startgame": "res://dialogue timelines/startgame.dtl"
+"meetmonet": "res://Dialogue/meetmonet.dtl",
+"monetflower": "res://Dialogue/monetflower.dtl",
+"startgame": "res://dialogue timelines/startgame.dtl",
+"startgame2": "res://Dialogue/startgame2.dtl"
 }
 layout/style_directory={
 "": "res://textboxstyle.tres",

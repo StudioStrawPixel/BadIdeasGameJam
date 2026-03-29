@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://0c8ydwl34b8s"
+path="res://.godot/imported/Castle Song.mp3-2cbd7893355b3f12feef79edc21c920d.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Castle Song.mp3"
+dest_files=["res://.godot/imported/Castle Song.mp3-2cbd7893355b3f12feef79edc21c920d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

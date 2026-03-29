@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://da84ajuoi0pue"]
+[gd_scene load_steps=32 format=3 uid="uid://da84ajuoi0pue"]
 
 [ext_resource type="Script" uid="uid://b2bk35y1vvgp1" path="res://assets/scripts/game.gd" id="1_0nt35"]
 [ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="2_jm60u"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://baromlk17y8mv" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/BG_Decor.png" id="6_18sfs"]
 [ext_resource type="Texture2D" uid="uid://cf10cq51yhawg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Middle_Decor.png" id="7_nx1da"]
 [ext_resource type="Texture2D" uid="uid://bx5g6piqvtyvg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Foreground.png" id="8_pnptk"]
-[ext_resource type="PackedScene" uid="uid://cvnkp5focks7l" path="res://assets/scenes/box.tscn" id="9_ke6qc"]
 [ext_resource type="Texture2D" uid="uid://b673ur31mqa20" path="res://assets/art/Background and Decor/Fantasy Forest 1/stone3.png" id="10_m3gqh"]
 [ext_resource type="Texture2D" uid="uid://bgu8n6jx4qrh7" path="res://assets/art/Background and Decor/glorp bush no glorp.png" id="11_ews07"]
 [ext_resource type="Texture2D" uid="uid://dqbfkcp5i02xn" path="res://assets/art/Background and Decor/bush no flower.png" id="12_oi8b3"]
@@ -15,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://cx3dri212bmlr" path="res://assets/art/Background and Decor/Big Tree/tree2.png" id="15_qbana"]
 [ext_resource type="Texture2D" uid="uid://u6txcmo7hcvx" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Ground.png" id="15_r7qpo"]
 [ext_resource type="Script" uid="uid://cotwbkdn5vhdd" path="res://assets/scenes/levels/camera_limits.gd" id="18_oi8b3"]
+[ext_resource type="Texture2D" uid="uid://bspltuciavelp" path="res://assets/art/characters/mokeyall.png" id="18_r7qpo"]
+[ext_resource type="Texture2D" uid="uid://crkuaj2jgc1h3" path="res://assets/art/Background and Decor/glorp bush.png" id="19_a3io4"]
+[ext_resource type="AudioStream" uid="uid://0c8ydwl34b8s" path="res://assets/sounds/Castle Song.mp3" id="20_a3io4"]
 [ext_resource type="PackedScene" uid="uid://7n8oulgl1q1h" path="res://assets/scenes/left_boundry.tscn" id="23_texi3"]
 [ext_resource type="PackedScene" uid="uid://3be3phhcmcti" path="res://assets/scenes/rightboundry_start.tscn" id="24_p3ih3"]
 [ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="25_gbp6d"]
@@ -34,20 +36,235 @@ texture = ExtResource("4_4pjnc")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_snkx0")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ld16"]
+atlas = ExtResource("18_r7qpo")
+region = Rect2(1814, 1069, 491, 1069)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3io4"]
+atlas = ExtResource("18_r7qpo")
+region = Rect2(1303, 1040, 447, 1040)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imqpt"]
+atlas = ExtResource("18_r7qpo")
+region = Rect2(1750, 1040, 447, 1040)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_imqpt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ld16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ld16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ld16")
+}],
+"loop": true,
+"name": &"humanwalk",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3io4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imqpt")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_a3io4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2656.0005, 217)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Player:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../GlorpBush:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7ld16"]
+resource_name = "glorphide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Player:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../GlorpBush:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_r7qpo"]
+resource_name = "humanwalkout"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-2656.0005, 217), Vector2(-1085.0001, 217)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.27),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Player:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_texi3"]
+resource_name = "humanend"
+length = 2.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1085.0001, 217), Vector2(-3566, 281)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.76),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Player:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.7333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../GlorpBush:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.6666666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ld16"]
+_data = {
+&"RESET": SubResource("Animation_a3io4"),
+&"glorphide": SubResource("Animation_7ld16"),
+&"humanend": SubResource("Animation_texi3"),
+&"humanwalkout": SubResource("Animation_r7qpo")
+}
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_0nt35")
 
 [node name="Player" parent="." instance=ExtResource("2_jm60u")]
 z_index = 1
-position = Vector2(-214, 447)
+position = Vector2(-223, 494)
 
 [node name="bubble" type="Marker2D" parent="Player"]
 position = Vector2(99, -391)
 
 [node name="Boxes" type="Node" parent="."]
-
-[node name="Box" parent="Boxes" instance=ExtResource("9_ke6qc")]
-position = Vector2(254, 33)
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(10, 10)
@@ -122,8 +339,8 @@ scale = Vector2(0.6933333, 0.60333335)
 texture = ExtResource("11_ews07")
 
 [node name="GlorpBushNoGlorp2" type="Sprite2D" parent="BackgroundDecor/-1"]
-position = Vector2(367.5, 237.5)
-scale = Vector2(0.97166663, 0.8883333)
+position = Vector2(-119.75001, 186.24998)
+scale = Vector2(0.8775, 0.77416664)
 texture = ExtResource("11_ews07")
 
 [node name="BushNoFlower" type="Sprite2D" parent="BackgroundDecor/-1"]
@@ -174,3 +391,32 @@ left_limit = -3000
 right_limit = 3250
 top_limit = -1500
 bottom_limit = 550
+
+[node name="Human" type="CharacterBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Human"]
+visible = false
+position = Vector2(-2656.0005, 217)
+scale = Vector2(0.7382892, 0.7142189)
+sprite_frames = SubResource("SpriteFrames_imqpt")
+animation = &"new_animation"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Human"]
+libraries = {
+&"": SubResource("AnimationLibrary_7ld16")
+}
+
+[node name="humanbubble" type="Marker2D" parent="Human"]
+position = Vector2(-994, -36)
+
+[node name="GlorpBush" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-129, 173)
+scale = Vector2(0.8616667, 0.77833337)
+texture = ExtResource("19_a3io4")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_a3io4")
+volume_db = -20.0
+pitch_scale = 1.72
+autoplay = true

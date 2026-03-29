@@ -1,0 +1,176 @@
+[gd_scene load_steps=21 format=3 uid="uid://da84ajuoi0pue"]
+
+[ext_resource type="Script" uid="uid://b2bk35y1vvgp1" path="res://assets/scripts/game.gd" id="1_0nt35"]
+[ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="2_jm60u"]
+[ext_resource type="Texture2D" uid="uid://4w33uel427s3" path="res://assets/art/Background and Decor/simple_terrain.png" id="4_4pjnc"]
+[ext_resource type="Texture2D" uid="uid://b7ae4ydepc12s" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Sky.png" id="5_qbana"]
+[ext_resource type="Texture2D" uid="uid://baromlk17y8mv" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/BG_Decor.png" id="6_18sfs"]
+[ext_resource type="Texture2D" uid="uid://cf10cq51yhawg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Middle_Decor.png" id="7_nx1da"]
+[ext_resource type="Texture2D" uid="uid://bx5g6piqvtyvg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Foreground.png" id="8_pnptk"]
+[ext_resource type="PackedScene" uid="uid://cvnkp5focks7l" path="res://assets/scenes/box.tscn" id="9_ke6qc"]
+[ext_resource type="Texture2D" uid="uid://b673ur31mqa20" path="res://assets/art/Background and Decor/Fantasy Forest 1/stone3.png" id="10_m3gqh"]
+[ext_resource type="Texture2D" uid="uid://bgu8n6jx4qrh7" path="res://assets/art/Background and Decor/glorp bush no glorp.png" id="11_ews07"]
+[ext_resource type="Texture2D" uid="uid://dqbfkcp5i02xn" path="res://assets/art/Background and Decor/bush no flower.png" id="12_oi8b3"]
+[ext_resource type="Texture2D" uid="uid://sie32ehhcdse" path="res://assets/art/Background and Decor/forest ground.png" id="14_oi8b3"]
+[ext_resource type="Texture2D" uid="uid://cx3dri212bmlr" path="res://assets/art/Background and Decor/Big Tree/tree2.png" id="15_qbana"]
+[ext_resource type="Texture2D" uid="uid://u6txcmo7hcvx" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Ground.png" id="15_r7qpo"]
+[ext_resource type="Script" uid="uid://cotwbkdn5vhdd" path="res://assets/scenes/levels/camera_limits.gd" id="18_oi8b3"]
+[ext_resource type="PackedScene" uid="uid://7n8oulgl1q1h" path="res://assets/scenes/left_boundry.tscn" id="23_texi3"]
+[ext_resource type="PackedScene" uid="uid://3be3phhcmcti" path="res://assets/scenes/rightboundry_start.tscn" id="24_p3ih3"]
+[ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="25_gbp6d"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_snkx0"]
+texture = ExtResource("4_4pjnc")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_i66uq"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_snkx0")
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_0nt35")
+
+[node name="Player" parent="." instance=ExtResource("2_jm60u")]
+z_index = 1
+position = Vector2(-214, 447)
+
+[node name="bubble" type="Marker2D" parent="Player"]
+position = Vector2(99, -391)
+
+[node name="Boxes" type="Node" parent="."]
+
+[node name="Box" parent="Boxes" instance=ExtResource("9_ke6qc")]
+position = Vector2(254, 33)
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(10, 10)
+tile_set = SubResource("TileSet_i66uq")
+format = 2
+layer_0/tile_data = PackedInt32Array(262142, 131072, 0, 262143, 131072, 0, 196608, 131072, 0, 262141, 131072, 0, 262140, 131072, 0, 262139, 131072, 0, 262138, 131072, 0, 262137, 131072, 0, 262136, 131072, 0, 262135, 131072, 0, 262134, 131072, 0, 262133, 131072, 0, 196609, 131072, 0, 196610, 131072, 0, 196611, 131072, 0, 196612, 131072, 0, 196613, 131072, 0, 196614, 131072, 0, 196615, 131072, 0, 196617, 131072, 0, 196616, 131072, 0, 196618, 131072, 0, 196619, 131072, 0, 196620, 131072, 0, 262132, 131072, 0, 262131, 131072, 0, 196621, 131072, 0, 196622, 131072, 0, 196623, 131072, 0, 196624, 131072, 0, 196625, 131072, 0, 196626, 131072, 0, 196627, 131072, 0, 196628, 131072, 0, 196629, 131072, 0, 196630, 131072, 0, 196631, 131072, 0, 131095, 131072, 0, 65559, 131072, 0, 23, 131072, 0, -65513, 131072, 0, -131049, 131072, 0, -196585, 131072, 0, 262130, 131072, 0, 196594, 131072, 0, 131058, 131072, 0, 65522, 131072, 0, -14, 131072, 0, -65550, 131072, 0, -131086, 131072, 0, -196622, 131072, 0)
+
+[node name="BackgroundDecor" type="Node2D" parent="."]
+
+[node name="-3" type="Node2D" parent="BackgroundDecor"]
+z_index = -30
+position = Vector2(-1302, -7)
+
+[node name="Parallax2D" type="Parallax2D" parent="BackgroundDecor/-3"]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("5_qbana")
+centered = false
+
+[node name="Parallax2D2" type="Parallax2D" parent="BackgroundDecor/-3"]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D2"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("6_18sfs")
+centered = false
+
+[node name="Parallax2D3" type="Parallax2D" parent="BackgroundDecor/-3"]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D3"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("7_nx1da")
+centered = false
+
+[node name="Parallax2D4" type="Parallax2D" parent="BackgroundDecor/-3"]
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D4"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("8_pnptk")
+centered = false
+
+[node name="-2" type="Node2D" parent="BackgroundDecor"]
+visible = false
+z_index = -20
+
+[node name="-1" type="Node2D" parent="BackgroundDecor"]
+z_index = -10
+
+[node name="Stone3" type="Sprite2D" parent="BackgroundDecor/-1"]
+position = Vector2(-1531, 369)
+scale = Vector2(2.3350515, 2.2901235)
+texture = ExtResource("10_m3gqh")
+
+[node name="GlorpBushNoGlorp" type="Sprite2D" parent="BackgroundDecor/-1"]
+position = Vector2(-1843, 294)
+scale = Vector2(0.6933333, 0.60333335)
+texture = ExtResource("11_ews07")
+
+[node name="GlorpBushNoGlorp2" type="Sprite2D" parent="BackgroundDecor/-1"]
+position = Vector2(367.5, 237.5)
+scale = Vector2(0.97166663, 0.8883333)
+texture = ExtResource("11_ews07")
+
+[node name="BushNoFlower" type="Sprite2D" parent="BackgroundDecor/-1"]
+position = Vector2(1792, 266)
+texture = ExtResource("12_oi8b3")
+
+[node name="BushNoFlower2" type="Sprite2D" parent="BackgroundDecor/-1"]
+position = Vector2(3605, 232)
+texture = ExtResource("12_oi8b3")
+
+[node name="0" type="Node2D" parent="BackgroundDecor"]
+
+[node name="ForestGround" type="Sprite2D" parent="BackgroundDecor/0"]
+position = Vector2(964, 162)
+scale = Vector2(1.5992187, 1)
+texture = ExtResource("14_oi8b3")
+
+[node name="1" type="Node2D" parent="BackgroundDecor"]
+z_index = 10
+
+[node name="2" type="Node2D" parent="BackgroundDecor"]
+z_index = 20
+
+[node name="Tree2" type="Sprite2D" parent="BackgroundDecor/2"]
+position = Vector2(-2680, -1410)
+scale = Vector2(0.87841725, 1.4898118)
+texture = ExtResource("15_qbana")
+
+[node name="3" type="Node2D" parent="BackgroundDecor"]
+z_index = 30
+
+[node name="Ground" type="Sprite2D" parent="BackgroundDecor/3"]
+position = Vector2(666, -149)
+scale = Vector2(3.5239584, 1.3101852)
+texture = ExtResource("15_r7qpo")
+
+[node name="Left Boundry" parent="." instance=ExtResource("23_texi3")]
+position = Vector2(-2493, -3327)
+
+[node name="rightboundry start" parent="." instance=ExtResource("24_p3ih3")]
+position = Vector2(4053, 448)
+
+[node name="Fade" parent="." instance=ExtResource("25_gbp6d")]
+
+[node name="CameraLimits" type="Node2D" parent="."]
+script = ExtResource("18_oi8b3")
+left_limit = -3000
+right_limit = 3250
+top_limit = -1500
+bottom_limit = 550

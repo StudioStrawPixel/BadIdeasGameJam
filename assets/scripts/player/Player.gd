@@ -12,7 +12,7 @@ enum STATE {
 	WALL_JUMP,
 	WALL_CLIMB,
 	DASH,
-	TURNING,
+	TURNING
 }
 
 const FALL_GRAVITY := 3500.0
@@ -54,10 +54,15 @@ var saved_position := Vector2.ZERO
 var can_dash := false
 var dash_jump_buffer := false
 var is_sprinting := false
-var is_gun_equipped: bool = false
-var was_gun_equipped_before_restricted: bool = false
-var in_dialogue: bool = false
-var is_equipping_gun: bool = false
+var is_gun_equipped := false
+var was_gun_equipped_before_restricted := false
+var in_dialogue := false
+var gun_locked := false
+var is_equipping_gun := false
+var is_slide_locked := false
+var slide_lock_timer: Timer
+var gun_show_timer: Timer
+var gun_unlocked: bool = false
 
 func _ready() -> void:
 	switch_state(active_state)
@@ -65,20 +70,43 @@ func _ready() -> void:
 	if gun:
 		gun.visible = false
 		gun.call("unequip")
+	slide_lock_timer = Timer.new()
+	slide_lock_timer.one_shot = true
+	slide_lock_timer.wait_time = 0.2
+	slide_lock_timer.timeout.connect(_on_slide_lock_end)
+	add_child(slide_lock_timer)
+	gun_show_timer = Timer.new()
+	gun_show_timer.one_shot = true
+	gun_show_timer.wait_time = 0.5
+	gun_show_timer.timeout.connect(_show_gun_after_delay)
+	add_child(gun_show_timer)
 	set_camera_limits()
 	camera_2d.make_current()
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
 	if in_dialogue:
-		velocity = Vector2.ZERO
+		velocity.x = 0
+		velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
 		move_and_slide()
 		return
-	if not is_equipping_gun:
-		process_state(delta)
+	if is_equipping_gun:
+		velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
+		velocity.x = 0
+		move_and_slide()
+		return
+	if is_slide_locked:
+		velocity.x = move_toward(velocity.x, 0, 8000 * delta)
+		velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
+		move_and_slide()
+		return
+	process_state(delta)
 	move_and_slide()
 
 func process_state(delta: float) -> void:
+	if is_slide_locked:
+		velocity.x = move_toward(velocity.x, 0, 8000 * delta)
+		return
 	match active_state:
 		STATE.FALL:
 			velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
@@ -127,11 +155,13 @@ func process_state(delta: float) -> void:
 			handle_sprint(delta)
 			if is_on_floor():
 				coyote_timer.start()
-			var distance := absf(position.x - saved_position.x)
+			var distance: float = abs(position.x - saved_position.x)
 			if distance >= DASH_LENGTH:
 				switch_state(STATE.FALL)
 
 func switch_state(to_state: STATE) -> void:
+	if is_equipping_gun and to_state in [STATE.JUMP, STATE.DOUBLE_JUMP, STATE.FLOAT, STATE.DASH, STATE.FALL, STATE.FLOOR]:
+		return
 	var previous_state := active_state
 	active_state = to_state
 	match active_state:
@@ -173,6 +203,8 @@ func switch_state(to_state: STATE) -> void:
 			dash_jump_buffer = false
 
 func handle_movement(input_direction: float = 0, horizontal_velocity: float = WALK_VELOCITY, step: float = WALK_VELOCITY) -> void:
+	if is_slide_locked or in_dialogue:
+		return
 	if input_direction == 0:
 		input_direction = signf(Input.get_axis("move_left", "move_right"))
 	if input_direction != 0:
@@ -189,39 +221,37 @@ func handle_sprint(delta: float) -> void:
 func set_facing_direction(direction: float) -> void:
 	if direction != 0:
 		facing_direction = direction
-		ledge_climb_ray_cast.position.x = direction * absf(ledge_climb_ray_cast.position.x)
-		ledge_climb_ray_cast.target_position.x = direction * absf(ledge_climb_ray_cast.target_position.x)
+		ledge_climb_ray_cast.position.x = direction * abs(ledge_climb_ray_cast.position.x)
+		ledge_climb_ray_cast.target_position.x = direction * abs(ledge_climb_ray_cast.target_position.x)
 		ledge_climb_ray_cast.force_raycast_update()
-		wall_slide_ray_cast.position.x = direction * absf(wall_slide_ray_cast.position.x)
-		wall_slide_ray_cast.target_position.x = direction * absf(wall_slide_ray_cast.target_position.x)
+		wall_slide_ray_cast.position.x = direction * abs(wall_slide_ray_cast.position.x)
+		wall_slide_ray_cast.target_position.x = direction * abs(wall_slide_ray_cast.target_position.x)
 		wall_slide_ray_cast.force_raycast_update()
 
 func toggle_gun():
+	if in_dialogue or gun_locked or not gun_unlocked:
+		return
 	if is_gun_equipped:
 		unequip_gun()
 	else:
 		equip_gun()
 
 func equip_gun() -> void:
+	if in_dialogue or gun_locked:
+		return
 	if gun:
 		gun.visible = false
 		gun.call("equip")
+	is_slide_locked = true
+	slide_lock_timer.start()
 	is_gun_equipped = true
 	is_equipping_gun = true
 	animated_sprite.play("gun_equip")
-	_start_gun_timer()
-
-func _start_gun_timer() -> void:
-	var t = Timer.new()
-	t.one_shot = true
-	t.wait_time = 0.9
-	add_child(t)
-	t.start()
-	t.timeout.connect(Callable(self, "_show_gun_after_delay"))
+	gun_show_timer.start()
 
 func _show_gun_after_delay() -> void:
-	if gun and is_gun_equipped:
-		gun.visible = true
+	if gun and is_gun_equipped and not gun_locked:
+		gun.reveal()
 
 func unequip_gun() -> void:
 	if gun:
@@ -237,24 +267,35 @@ func _on_animation_finished(anim_name: String) -> void:
 		animated_sprite.frame = 1
 		is_equipping_gun = false
 
+func _on_slide_lock_end():
+	is_slide_locked = false
+
 func can_player_shoot() -> bool:
-	return is_gun_equipped and active_state not in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FALL]
+	return is_gun_equipped and not gun_locked and active_state not in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FLOAT]
 
 func _process(delta: float) -> void:
-	if in_dialogue:
-		velocity = Vector2.ZERO
+	if gun_locked:
+		if gun:
+			gun.visible = false
+		is_gun_equipped = false
 		return
-	if is_gun_equipped:
+	if is_equipping_gun:
 		var mouse_global_pos = get_global_mouse_position()
 		var flip = mouse_global_pos.x < global_position.x
 		animated_sprite.flip_h = flip
 		gun.position.x = abs(gun.position.x) * (-1 if flip else 1)
-		gun.rotation_degrees = 0 if not flip else 180
+		gun.rotation_degrees = 180 if flip else 0
+		return
+	if is_gun_equipped:
+		animated_sprite.flip_h = facing_direction < 0
+		var flip = facing_direction < 0
+		gun.position.x = abs(gun.position.x) * (-1 if flip else 1)
+		gun.rotation_degrees = 180 if flip else 0
 	else:
 		animated_sprite.flip_h = facing_direction < 0
 	if gun:
-		var in_restricted_state := active_state in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FLOAT]
-		if in_restricted_state and is_gun_equipped:
+		var restricted := active_state in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FLOAT]
+		if restricted and is_gun_equipped:
 			was_gun_equipped_before_restricted = true
 			unequip_gun()
 		elif was_gun_equipped_before_restricted:
@@ -262,7 +303,7 @@ func _process(delta: float) -> void:
 			was_gun_equipped_before_restricted = false
 
 func _input(event):
-	if in_dialogue:
+	if in_dialogue or gun_locked or not gun_unlocked:
 		return
 	if event.is_action_pressed("toggle_gun"):
 		toggle_gun()
@@ -277,8 +318,17 @@ func set_camera_limits():
 
 func start_dialogue():
 	in_dialogue = true
-	velocity = Vector2.ZERO
+	gun_locked = true
+	velocity.x = 0
+	is_slide_locked = true
+	if is_gun_equipped:
+		unequip_gun()
+	if gun:
+		gun.visible = false
 	animated_sprite.play("idle")
 
 func end_dialogue():
 	in_dialogue = false
+	gun_locked = false
+	is_slide_locked = false
+	animated_sprite.play("idle")

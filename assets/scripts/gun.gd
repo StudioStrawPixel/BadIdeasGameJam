@@ -16,16 +16,13 @@ func _ready():
 func _process(delta: float) -> void:
 	if not is_equipped:
 		return
-
 	var mouse_pos = get_global_mouse_position()
 	var direction = (mouse_pos - global_position).normalized()
 	rotation = direction.angle()
-
 	if mouse_pos.x < global_position.x:
 		scale.y = -abs(original_scale.y)
 	else:
 		scale.y = abs(original_scale.y)
-
 	if Input.is_action_just_pressed("shoot") and can_shoot:
 		shoot()
 
@@ -42,8 +39,11 @@ func _on_timer_timeout():
 
 func equip():
 	is_equipped = true
-	visible = true
+	
 
 func unequip():
 	is_equipped = false
 	visible = false
+
+func reveal(): 
+	visible = true

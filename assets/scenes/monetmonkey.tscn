@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://butmkyyg0eaby"]
+[gd_scene load_steps=9 format=3 uid="uid://butmkyyg0eaby"]
 
 [ext_resource type="Texture2D" uid="uid://bspltuciavelp" path="res://assets/art/characters/mokeyall.png" id="1_22oo1"]
 [ext_resource type="Script" uid="uid://bbttxyfyw8r0i" path="res://assets/scripts/monetmonkey.gd" id="1_wye12"]
+[ext_resource type="Texture2D" uid="uid://b3fm2d4bnij52" path="res://assets/art/2d/items/smoke_07_strong_a.png" id="3_uqb8q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wye12"]
 atlas = ExtResource("1_22oo1")
@@ -33,14 +34,29 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctjd2"]
 size = Vector2(392.5, 584)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uqb8q"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+
 [node name="Monkey" type="Area2D"]
 script = ExtResource("1_wye12")
 
 [node name="Monet" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 0.601)
 sprite_frames = SubResource("SpriteFrames_6lqjo")
-animation = &"monetbox"
+animation = &"monetnobox"
 
 [node name="MonetCollsion" type="CollisionShape2D" parent="."]
 position = Vector2(23, 85)
 shape = SubResource("RectangleShape2D_ctjd2")
+
+[node name="Smoke" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 10
+texture = ExtResource("3_uqb8q")
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_uqb8q")

@@ -337,10 +337,8 @@ texture_filter = 1
 position = Vector2(12, -249)
 scale = Vector2(0.4259294, 0.44146433)
 sprite_frames = SubResource("SpriteFrames_aowxt")
-animation = &"gun_equip"
+animation = &"walk"
 autoplay = "idle"
-frame = 2
-frame_progress = 0.48739782
 
 [node name="CameraOffset" type="Node2D" parent="."]
 position = Vector2(0, -33)
@@ -393,5 +391,5 @@ one_shot = true
 
 [node name="Gun" parent="." instance=ExtResource("12_ykswe")]
 z_index = -1
-position = Vector2(113.000015, -286.00003)
+position = Vector2(86, -285)
 scale = Vector2(2, 2)

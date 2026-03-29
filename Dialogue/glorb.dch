@@ -2,11 +2,22 @@
 "@path": "res://addons/dialogic/Resources/character.gd",
 "@subpath": NodePath(""),
 &"_translation_id": "",
-&"color": Color(0.023281487, 0.0234375, 0.023254395, 1),
+&"color": Color(0.4257393, 0.6640625, 0.39169312, 1),
 &"custom_info": {
 "prefix": "",
 "sound_mood_default": "",
-"sound_moods": {},
+"sound_moods": {
+"yes": {
+"mode": 0,
+"name": "yes",
+"pitch_base": 2.5,
+"pitch_variance": 0.5,
+"skip_characters": 5.0,
+"sound_path": "res://Dialogue/bleep003.ogg",
+"volume_base": 0.0,
+"volume_variance": -0.5
+}
+},
 "style": "textboxstyle",
 "suffix": ""
 },
