@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cvpkehdrg2mh3"]
+[gd_scene load_steps=33 format=3 uid="uid://cvpkehdrg2mh3"]
 
 [ext_resource type="Script" uid="uid://c60k6wle24sl6" path="res://assets/scenes/levels/farquid.gd" id="1_cb316"]
 [ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="1_mis3e"]
@@ -18,7 +18,10 @@
 [ext_resource type="Script" uid="uid://cotwbkdn5vhdd" path="res://assets/scenes/levels/camera_limits.gd" id="15_2xuyq"]
 [ext_resource type="Texture2D" uid="uid://4w33uel427s3" path="res://assets/art/Background and Decor/simple_terrain.png" id="16_522ac"]
 [ext_resource type="Texture2D" uid="uid://c5c0jdt67to8l" path="res://assets/art/characters/MERMAN1.png" id="18_7pc1u"]
+[ext_resource type="Script" uid="uid://djgenf8jeeg3w" path="res://assets/scenes/levels/shoottoclean.gd" id="18_gpcm0"]
 [ext_resource type="AudioStream" uid="uid://bsnwp8d5vbl0a" path="res://assets/sounds/farquid.mp3" id="19_lxxmr"]
+[ext_resource type="Texture2D" uid="uid://bgncn6cwr5p3g" path="res://assets/art/Background and Decor/waterpool.png" id="21_5qcwf"]
+[ext_resource type="Texture2D" uid="uid://d3bka8oyp4gc1" path="res://assets/art/Background and Decor/bridge.png" id="22_brleu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pc5df"]
 texture = ExtResource("16_522ac")
@@ -62,6 +65,14 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxxmr"]
 size = Vector2(1829, 3996)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gpcm0"]
+size = Vector2(2162, 2979)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7ke2w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5qcwf"]
+radius = 2050.451
 
 [node name="Farquid" type="Node2D"]
 script = ExtResource("1_cb316")
@@ -177,7 +188,7 @@ scale = Vector2(2.9442708, 0.9259259)
 texture = ExtResource("11_43cua")
 
 [node name="Ground2" type="Sprite2D" parent="BackgroundDecor/3"]
-position = Vector2(3021.5, -76.35367)
+position = Vector2(3026.0002, -71.99999)
 scale = Vector2(2.6922097, 1.0697154)
 texture = ExtResource("11_43cua")
 
@@ -186,39 +197,43 @@ position = Vector2(8982, -87.999985)
 scale = Vector2(3.5339367, 1.1008916)
 texture = ExtResource("11_43cua")
 
-[node name="DirtyWaterfall" type="Sprite2D" parent="BackgroundDecor/3"]
-position = Vector2(5459.75, -462.50006)
-scale = Vector2(0.94414073, 0.90787035)
-texture = ExtResource("12_vt2dm")
-
 [node name="Left Boundry" parent="." instance=ExtResource("13_7jy2j")]
 position = Vector2(-2548, -3272)
 
 [node name="Fade" parent="." instance=ExtResource("14_dwtfl")]
+visible = false
 
 [node name="CameraLimits" type="Node2D" parent="."]
 script = ExtResource("15_2xuyq")
 left_limit = -2000
 right_limit = 9000
 top_limit = -1500
-bottom_limit = 550
+bottom_limit = 500
 
 [node name="Boxes" type="Node" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("18_gpcm0")
+
+[node name="DirtyWaterfall" type="Sprite2D" parent="Area2D"]
+z_index = 50
+position = Vector2(5459.75, -462.50006)
+scale = Vector2(0.94414073, 0.90787035)
+texture = ExtResource("12_vt2dm")
 
 [node name="waterfallcutscene" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(5297, -414)
 shape = SubResource("RectangleShape2D_7pc1u")
 
 [node name="farquidcharacter" type="Area2D" parent="."]
-z_index = 50
+z_index = -1
 
 [node name="farquidbubble" type="Marker2D" parent="farquidcharacter"]
 position = Vector2(4917, -491)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="farquidcharacter"]
 visible = false
+z_index = -1
 position = Vector2(4988, -162)
 scale = Vector2(0.3026914, 0.29768518)
 sprite_frames = SubResource("SpriteFrames_7ke2w")
@@ -234,8 +249,38 @@ position = Vector2(-2548, -3272)
 position = Vector2(12689, 2497)
 shape = SubResource("RectangleShape2D_lxxmr")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="farquid" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_lxxmr")
+volume_db = 2.0
+max_distance = 10000.0
+
+[node name="shallnotpass" type="Area2D" parent="."]
+
+[node name="nuhuh" type="CollisionShape2D" parent="shallnotpass"]
+position = Vector2(5566, -757)
+shape = SubResource("RectangleShape2D_gpcm0")
+
+[node name="Bridge" type="Sprite2D" parent="."]
+visible = false
+z_index = 50
+position = Vector2(5474.0005, -521)
+scale = Vector2(0.9248697, 0.975)
+texture = ExtResource("22_brleu")
+
+[node name="Waterpool" type="Sprite2D" parent="."]
+visible = false
+z_index = 30
+position = Vector2(5433, -403)
+texture = ExtResource("21_5qcwf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_7ke2w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+position = Vector2(5371, 2318)
+shape = SubResource("CircleShape2D_5qcwf")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="body_entered" from="shallnotpass" to="." method="_on_shallnotpass_body_entered"]

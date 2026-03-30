@@ -12,6 +12,7 @@ extends Node2D
 @onready var camera_limits: Node = $CameraLimits
 
 var triggered := false
+var monetflower_done := false
 
 func _ready():
 	if player and camera_limits:
@@ -60,6 +61,7 @@ Unequip using E again
 	Dialogic.start("monetflower")
 	await Dialogic.timeline_ended
 	player.end_dialogue()
+	monetflower_done = true  
 	player.can_play_footsteps = true
 
 func wait_for_monetnobox_and_smoke() -> void:
@@ -72,6 +74,14 @@ func _on_tutorial_done():
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body.name != "Player":
+		return
+
+	if monetflower_done:
 		await fade_layer.fade(0.0, 1.5).finished
 		get_tree().change_scene_to_file("res://assets/scenes/levels/farquid.tscn")
+	else:
+		player.start_dialogue()
+		Dialogic.start("monetno")
+		await Dialogic.timeline_ended
+		player.end_dialogue()

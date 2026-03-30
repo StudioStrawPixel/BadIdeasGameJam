@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbf5e7d6sf2ee"]
+[gd_scene load_steps=13 format=3 uid="uid://bbf5e7d6sf2ee"]
 
 [ext_resource type="Script" uid="uid://g2hjq2ovl2gf" path="res://assets/scripts/main_menu.gd" id="1_obrqb"]
 [ext_resource type="Shader" uid="uid://dfcufwx2by160" path="res://assets/scenes/scroll.gdshader" id="2_v1ppo"]
 [ext_resource type="FontFile" uid="uid://7fmgxrcuswm6" path="res://assets/art/2d/text boxes/HugMeTight-GzZq.ttf" id="3_obrqb"]
+[ext_resource type="Texture2D" uid="uid://4mb31tsi25cd" path="res://assets/art/anims/title.png" id="3_v71do"]
 [ext_resource type="AudioStream" uid="uid://c0kimmsrevp7i" path="res://assets/sounds/funnymusic.mp3" id="4_57ux2"]
 [ext_resource type="Script" uid="uid://cfhq3314spclq" path="res://assets/scenes/audio_control.gd" id="5_f2xsc"]
+[ext_resource type="FontFile" uid="uid://gvqtctjayc2a" path="res://assets/art/2d/text boxes/Yabikoma-e9W16.otf" id="6_xmmar"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_obrqb"]
 shader = ExtResource("2_v1ppo")
-shader_parameter/speed = 0.2
+shader_parameter/speed = 0.1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rhts7"]
 bg_color = Color(1, 1, 1, 1)
@@ -59,15 +61,18 @@ theme_override_constants/separation = 20
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -4
 layout_mode = 0
-offset_right = 1274.0
-offset_bottom = 709.0
+offset_right = 1342.0
+offset_bottom = 781.0
 color = Color(0.5758153, 0.7731134, 0.59597266, 1)
 
 [node name="Pattern" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_obrqb")
 layout_mode = 0
-offset_right = 1274.0
-offset_bottom = 708.0
+offset_right = 3840.0
+offset_bottom = 2160.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("3_v71do")
+stretch_mode = 1
 
 [node name="StartGame" type="Button" parent="."]
 layout_mode = 0
@@ -115,13 +120,17 @@ autoplay = true
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
-offset_left = 170.0
-offset_top = 57.0
-offset_right = 1126.0
-offset_bottom = 204.0
-theme_override_fonts/font = ExtResource("3_obrqb")
-theme_override_font_sizes/font_size = 100
-text = "TITLE"
+offset_left = 163.0
+offset_top = -10.0
+offset_right = 1222.0
+offset_bottom = 229.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_xmmar")
+theme_override_font_sizes/font_size = 80
+text = "Glorp and Glep: 
+The Cardboard Crisis"
 horizontal_alignment = 1
 vertical_alignment = 1
 

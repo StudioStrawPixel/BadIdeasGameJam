@@ -47,7 +47,7 @@ script = ExtResource("1_pxvrf")
 
 [node name="Player" parent="." instance=ExtResource("2_l1rhi")]
 z_index = 1
-position = Vector2(-1448, 503)
+position = Vector2(-1442, 436)
 
 [node name="bubble" type="Marker2D" parent="Player"]
 position = Vector2(77, -459)
@@ -198,7 +198,7 @@ script = ExtResource("20_pxvrf")
 left_limit = -2000
 right_limit = 3250
 top_limit = -1500
-bottom_limit = 550
+bottom_limit = 500
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2(750, 500)

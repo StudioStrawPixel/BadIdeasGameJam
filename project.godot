@@ -38,6 +38,8 @@ directories/dtl_directory={
 "left bounds": "res://dialogue timelines/left bounds.dtl",
 "meetmonet": "res://Dialogue/meetmonet.dtl",
 "monetflower": "res://Dialogue/monetflower.dtl",
+"monetno": "res://Dialogue/monetno.dtl",
+"nopass": "res://Dialogue/nopass.dtl",
 "startgame": "res://dialogue timelines/startgame.dtl",
 "startgame2": "res://Dialogue/startgame2.dtl",
 "waterfall": "res://dialogue timelines/waterfall.dtl"
