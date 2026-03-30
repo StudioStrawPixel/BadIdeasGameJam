@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4e5q527vbbg6"]
+[gd_scene load_steps=5 format=3 uid="uid://b4e5q527vbbg6"]
 
 [ext_resource type="Script" uid="uid://cv4w4ip3ldqol" path="res://opening_animation.gd" id="1_wx8i6"]
 [ext_resource type="VideoStream" uid="uid://bo8qaoddvulqy" path="res://assets/art/anims/finalopeninganim (1).ogv" id="2_wx8i6"]
 [ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="3_s3m5x"]
+[ext_resource type="FontFile" uid="uid://7fmgxrcuswm6" path="res://assets/art/2d/text boxes/HugMeTight-GzZq.ttf" id="4_s3m5x"]
 
 [node name="OpeningAnimation" type="Control"]
 layout_mode = 3
@@ -25,3 +26,23 @@ autoplay = true
 expand = true
 
 [node name="Fade" parent="." instance=ExtResource("3_s3m5x")]
+visible = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1114.0
+offset_top = 629.0
+offset_right = 1211.0
+offset_bottom = 685.0
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 9.0
+offset_right = 78.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("4_s3m5x")
+theme_override_font_sizes/font_size = 30
+text = "Skip"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

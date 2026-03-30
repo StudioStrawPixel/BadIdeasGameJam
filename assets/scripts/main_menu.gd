@@ -24,10 +24,12 @@ func _on_options_pressed() -> void:
 	options_screen.visible = true
 	title.visible = false
 
+func _on_back_pressed() -> void:
+	_ready()
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_back_pressed() -> void:
-	_ready()
+func _on_youtube_pressed() -> void:
+	OS.shell_open("https://www.youtube.com/@StudioStrawPixel")

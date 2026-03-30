@@ -14,3 +14,7 @@ func _ready():
 func _on_video_finished():
 	await fade_layer.fade(1.0, 1.5).finished
 	get_tree().change_scene_to_file(main_scene_path)
+
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file(main_scene_path)

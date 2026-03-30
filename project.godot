@@ -23,11 +23,14 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 [dialogic]
 
 directories/dch_directory={
+"bird1": "res://Dialogue/bird1.dch",
+"bird2": "res://Dialogue/bird2.dch",
 "farquid": "res://Dialogue/farquid.dch",
 "glorb": "res://Dialogue/glorb.dch",
 "human": "res://Dialogue/human.dch",
 "humannosound": "res://Dialogue/humannosound.dch",
 "monet": "res://Dialogue/monet.dch",
+"raccoonmama": "res://Dialogue/raccoonmama.dch",
 "unit_test_character": "res://Tests/Resources/unit_test_character.dch",
 "unknown": "res://Dialogue/unknown.dch"
 }
@@ -40,6 +43,7 @@ directories/dtl_directory={
 "monetflower": "res://Dialogue/monetflower.dtl",
 "monetno": "res://Dialogue/monetno.dtl",
 "nopass": "res://Dialogue/nopass.dtl",
+"notyet": "res://Dialogue/notyet.dtl",
 "startgame": "res://dialogue timelines/startgame.dtl",
 "startgame2": "res://Dialogue/startgame2.dtl",
 "waterfall": "res://dialogue timelines/waterfall.dtl"

@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbf5e7d6sf2ee"]
+[gd_scene load_steps=15 format=3 uid="uid://bbf5e7d6sf2ee"]
 
 [ext_resource type="Script" uid="uid://g2hjq2ovl2gf" path="res://assets/scripts/main_menu.gd" id="1_obrqb"]
 [ext_resource type="Shader" uid="uid://dfcufwx2by160" path="res://assets/scenes/scroll.gdshader" id="2_v1ppo"]
 [ext_resource type="FontFile" uid="uid://7fmgxrcuswm6" path="res://assets/art/2d/text boxes/HugMeTight-GzZq.ttf" id="3_obrqb"]
 [ext_resource type="Texture2D" uid="uid://4mb31tsi25cd" path="res://assets/art/anims/title.png" id="3_v71do"]
-[ext_resource type="AudioStream" uid="uid://c0kimmsrevp7i" path="res://assets/sounds/funnymusic.mp3" id="4_57ux2"]
 [ext_resource type="Script" uid="uid://cfhq3314spclq" path="res://assets/scenes/audio_control.gd" id="5_f2xsc"]
+[ext_resource type="AudioStream" uid="uid://dooyqqgl0nluo" path="res://assets/sounds/sillyserenade.mp3" id="5_xmmar"]
 [ext_resource type="FontFile" uid="uid://gvqtctjayc2a" path="res://assets/art/2d/text boxes/Yabikoma-e9W16.otf" id="6_xmmar"]
+[ext_resource type="Texture2D" uid="uid://nskmxtaxh2n6" path="res://assets/art/Happy.png" id="7_ej4af"]
+[ext_resource type="FontFile" uid="uid://dofyn875pnpjw" path="res://Dialogue/TellMeAJoke-gww4R.ttf" id="8_66en2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_obrqb"]
 shader = ExtResource("2_v1ppo")
@@ -114,7 +116,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
 text = "Exit"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_57ux2")
+stream = ExtResource("5_xmmar")
 volume_db = -10.0
 autoplay = true
 
@@ -127,12 +129,37 @@ offset_bottom = 229.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("6_xmmar")
 theme_override_font_sizes/font_size = 80
 text = "Glorp and Glep: 
 The Cardboard Crisis"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="click" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1037.0
+offset_top = 428.0
+offset_right = 1228.0
+offset_bottom = 503.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_66en2")
+theme_override_font_sizes/font_size = 30
+text = "Click to go to my youtube channel!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="youtube" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1031.0
+offset_top = 472.0
+offset_right = 1234.0
+offset_bottom = 693.0
+icon = ExtResource("7_ej4af")
+flat = true
+expand_icon = true
 
 [node name="OptionsScreen" type="Panel" parent="."]
 layout_mode = 1
@@ -177,10 +204,10 @@ text = "Back"
 
 [node name="AudioControl" type="HSlider" parent="OptionsScreen"]
 layout_mode = 0
-offset_left = 141.5
-offset_top = 113.5
-offset_right = 726.5
-offset_bottom = 215.0
+offset_left = 259.5
+offset_top = 100.5
+offset_right = 844.5
+offset_bottom = 202.0
 theme_override_styles/slider = SubResource("StyleBoxLine_57ux2")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_f2xsc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_v71do")
@@ -189,8 +216,35 @@ max_value = 0.0
 script = ExtResource("5_f2xsc")
 audio_bus_name = "Master"
 
+[node name="Label2" type="Label" parent="OptionsScreen"]
+layout_mode = 1
+offset_left = 14.5
+offset_top = 111.5
+offset_right = 247.5
+offset_bottom = 192.5
+theme_override_fonts/font = ExtResource("6_xmmar")
+theme_override_font_sizes/font_size = 30
+text = "Master Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="OptionsScreen"]
+layout_mode = 0
+offset_left = -70.5
+offset_top = 178.5
+offset_right = 964.5
+offset_bottom = 300.5
+theme_override_fonts/font = ExtResource("8_66en2")
+theme_override_font_sizes/font_size = 30
+text = "Oops! 
+Seems like the developer ran out of time and could only do a volume slider!
+At least it works and you found this lil easter egg :3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="youtube" to="." method="_on_youtube_pressed"]
 [connection signal="pressed" from="OptionsScreen/Back" to="." method="_on_back_pressed"]
 [connection signal="value_changed" from="OptionsScreen/AudioControl" to="OptionsScreen/AudioControl" method="_on_value_changed"]

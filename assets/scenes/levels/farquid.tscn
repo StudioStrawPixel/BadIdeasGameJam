@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cvpkehdrg2mh3"]
+[gd_scene load_steps=34 format=3 uid="uid://cvpkehdrg2mh3"]
 
 [ext_resource type="Script" uid="uid://c60k6wle24sl6" path="res://assets/scenes/levels/farquid.gd" id="1_cb316"]
 [ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="1_mis3e"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c5c0jdt67to8l" path="res://assets/art/characters/MERMAN1.png" id="18_7pc1u"]
 [ext_resource type="Script" uid="uid://djgenf8jeeg3w" path="res://assets/scenes/levels/shoottoclean.gd" id="18_gpcm0"]
 [ext_resource type="AudioStream" uid="uid://bsnwp8d5vbl0a" path="res://assets/sounds/farquid.mp3" id="19_lxxmr"]
+[ext_resource type="Script" uid="uid://dgyp3li3kaxjk" path="res://assets/scenes/levels/area_2d_2.gd" id="20_brleu"]
 [ext_resource type="Texture2D" uid="uid://bgncn6cwr5p3g" path="res://assets/art/Background and Decor/waterpool.png" id="21_5qcwf"]
 [ext_resource type="Texture2D" uid="uid://d3bka8oyp4gc1" path="res://assets/art/Background and Decor/bridge.png" id="22_brleu"]
 
@@ -206,7 +207,7 @@ visible = false
 [node name="CameraLimits" type="Node2D" parent="."]
 script = ExtResource("15_2xuyq")
 left_limit = -2000
-right_limit = 9000
+right_limit = 9500
 top_limit = -1500
 bottom_limit = 500
 
@@ -244,9 +245,10 @@ frame_progress = 0.8484585
 
 [node name="Area2D2" type="Area2D" parent="."]
 position = Vector2(-2548, -3272)
+script = ExtResource("20_brleu")
 
 [node name="farquidright" type="CollisionShape2D" parent="Area2D2"]
-position = Vector2(12689, 2497)
+position = Vector2(12631, 2483)
 shape = SubResource("RectangleShape2D_lxxmr")
 
 [node name="farquid" type="AudioStreamPlayer2D" parent="."]
@@ -282,5 +284,5 @@ position = Vector2(5371, 2318)
 shape = SubResource("CircleShape2D_5qcwf")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
 [connection signal="body_entered" from="shallnotpass" to="." method="_on_shallnotpass_body_entered"]
