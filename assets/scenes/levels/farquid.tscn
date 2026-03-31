@@ -223,7 +223,6 @@ texture = ExtResource("11_43cua")
 position = Vector2(-2548, -3272)
 
 [node name="Fade" parent="." instance=ExtResource("14_dwtfl")]
-visible = false
 
 [node name="CameraLimits" type="Node2D" parent="."]
 script = ExtResource("15_2xuyq")

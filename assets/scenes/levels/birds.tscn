@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://byd4yxf3hdmqb"]
+[gd_scene load_steps=39 format=3 uid="uid://byd4yxf3hdmqb"]
 
 [ext_resource type="Script" uid="uid://cti37752c5lgi" path="res://assets/scenes/levels/birds.gd" id="1_5bcl7"]
 [ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="1_58cn0"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cvnkp5focks7l" path="res://assets/scenes/box.tscn" id="19_nbbfc"]
 [ext_resource type="Texture2D" uid="uid://vonmt7s3cvve" path="res://assets/art/characters/birdie2.png" id="20_eg8l5"]
 [ext_resource type="AudioStream" uid="uid://0c8ydwl34b8s" path="res://assets/sounds/Castle Song.mp3" id="22_n12ow"]
+[ext_resource type="Texture2D" uid="uid://bf0sq18a8t2p3" path="res://assets/art/Background and Decor/Big Tree/tree1.png" id="23_ehnsn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2dsga"]
 texture = ExtResource("4_n12ow")
@@ -37,6 +38,81 @@ texture = ExtResource("4_n12ow")
 [sub_resource type="TileSet" id="TileSet_j0dtf"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_2dsga")
+
+[sub_resource type="Animation" id="Animation_5bcl7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bird/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fly"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bird/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bird/AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(653, -303)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("bird/AnimatedSprite2D:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("bird/AnimatedSprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.251)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("bird/AnimatedSprite2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_eg8l5"]
 resource_name = "bird_fly_in"
@@ -112,81 +188,6 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"chirp"]
-}
-
-[sub_resource type="Animation" id="Animation_5bcl7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("bird/AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"fly"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("bird/AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("bird/AnimatedSprite2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(653, -303)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("bird/AnimatedSprite2D:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("bird/AnimatedSprite2D:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.2, 0.251)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("bird/AnimatedSprite2D:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_n12ow"]
@@ -602,5 +603,10 @@ max_distance = 10000.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(9889, -447)
 shape = SubResource("RectangleShape2D_n12ow")
+
+[node name="bigtree" type="Sprite2D" parent="."]
+position = Vector2(8885.001, -657)
+scale = Vector2(0.7568743, 0.757732)
+texture = ExtResource("23_ehnsn")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

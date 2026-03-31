@@ -1,0 +1,8 @@
+bird1: [mood=yes] . . .
+bird1: [mood=yes] Now that the tree is out of the way you can now be on your way strange one
+bird1: [mood=yes] We will watch you from the sky
+bird1: [mood=yes] If you need help us birds will make sure you get it!
+bird1: [mood=yes] Thank you again, bye bye!
+glorb: [mood=yes] Bye!
+[wait time="0.5"]
+[end_timeline]

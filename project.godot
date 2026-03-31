@@ -40,6 +40,7 @@ directories/dtl_directory={
 "enterfarquid": "res://Dialogue/enterfarquid.dtl",
 "farquidhelp": "res://Dialogue/farquidhelp.dtl",
 "farquidpass": "res://Dialogue/farquidpass.dtl",
+"goodbyebird": "res://Dialogue/goodbyebird.dtl",
 "humanbox": "res://Dialogue/humanbox.dtl",
 "humanendtimeline": "res://Dialogue/humanendtimeline.dtl",
 "left bounds": "res://dialogue timelines/left bounds.dtl",

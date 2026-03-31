@@ -558,6 +558,7 @@ position = Vector2(-2656.0005, 217)
 scale = Vector2(1.1972334, 1.1758295)
 sprite_frames = SubResource("SpriteFrames_imqpt")
 animation = &"humanwalk"
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Human"]
 libraries = {
