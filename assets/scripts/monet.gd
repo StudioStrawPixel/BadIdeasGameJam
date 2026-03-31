@@ -13,6 +13,7 @@ extends Node2D
 
 var triggered := false
 var monetflower_done := false
+var flower_sound: AudioStreamPlayer2D
 
 func _ready():
 	if player and camera_limits:
@@ -22,6 +23,9 @@ func _ready():
 	tween.finished.connect(_start_scene)
 	if not music_player.playing:
 		music_player.play()
+	flower_sound = AudioStreamPlayer2D.new()
+	flower_sound.stream = load("res://assets/sounds/pop.mp3")
+	add_child(flower_sound)
 
 func _start_scene():
 	player.set_process(true)
@@ -59,6 +63,8 @@ Unequip using E again
 	await get_tree().create_timer(0.5).timeout
 	player.start_dialogue()
 	Dialogic.start("monetflower")
+	if flower_sound:
+		flower_sound.play()
 	await Dialogic.timeline_ended
 	player.end_dialogue()
 	monetflower_done = true  
@@ -72,11 +78,9 @@ func _on_tutorial_done():
 	player.set_process(true)
 	player.set_physics_process(true)
 
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name != "Player":
 		return
-
 	if monetflower_done:
 		await fade_layer.fade(0.0, 1.5).finished
 		get_tree().change_scene_to_file("res://assets/scenes/levels/farquid.tscn")

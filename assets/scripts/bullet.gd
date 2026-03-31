@@ -1,6 +1,7 @@
 extends Area2D
 
-const SPEED: int = 600
+const SPEED: int = 1200
+const LIFETIME: float = 1.4
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -9,6 +10,8 @@ var can_hit = true
 func _ready():
 	animated_sprite_2d.play()
 	animated_sprite_2d.animation_finished.connect(_on_animation_finished)
+	await get_tree().create_timer(LIFETIME).timeout
+	queue_free()
 
 func _process(delta: float) -> void:
 	position += transform.x * SPEED * delta

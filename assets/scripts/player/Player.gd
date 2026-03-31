@@ -86,23 +86,15 @@ func _ready() -> void:
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
-	if in_dialogue:
-		velocity.x = 0
+	if in_dialogue or is_equipping_gun or is_slide_locked:
 		velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
-		move_and_slide()
-		return
-	if is_equipping_gun:
-		velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
-		velocity.x = 0
-		move_and_slide()
-		return
-	if is_slide_locked:
-		velocity.x = move_toward(velocity.x, 0, 8000 * delta)
-		velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
+		if not in_dialogue:
+			velocity.x = 0
 		move_and_slide()
 		return
 	process_state(delta)
 	move_and_slide()
+	_update_footsteps()
 
 func process_state(delta: float) -> void:
 	if is_slide_locked:
@@ -161,8 +153,6 @@ func process_state(delta: float) -> void:
 				switch_state(STATE.FALL)
 
 func switch_state(to_state: STATE) -> void:
-	if is_equipping_gun and to_state in [STATE.JUMP, STATE.DOUBLE_JUMP, STATE.FLOAT, STATE.DASH, STATE.FALL, STATE.FLOOR]:
-		return
 	var previous_state := active_state
 	active_state = to_state
 	match active_state:
@@ -208,32 +198,29 @@ func handle_movement(input_direction: float = 0, horizontal_velocity: float = WA
 		return
 	if input_direction == 0:
 		input_direction = signf(Input.get_axis("move_left", "move_right"))
-	var target_velocity = input_direction * horizontal_velocity
-	velocity.x = move_toward(velocity.x, target_velocity, step)
+	velocity.x = move_toward(velocity.x, input_direction * horizontal_velocity, step)
 	if input_direction != 0:
 		set_facing_direction(input_direction)
-		if can_play_footsteps and not footstep_audio.playing and is_on_floor():
-			footstep_audio.play()
-	else:
-		if footstep_audio.playing:
-			footstep_audio.stop()
 
 func handle_sprint(delta: float) -> void:
 	var input_dir = signf(Input.get_axis("move_left", "move_right"))
 	if input_dir != 0:
 		set_facing_direction(input_dir)
 		velocity.x = move_toward(velocity.x, input_dir * SPRINT_VELOCITY, SPRINT_ACCELERATION * delta)
-		if can_play_footsteps and not footstep_audio.playing and is_on_floor():
-			footstep_audio.pitch_scale = 1.5
+	is_sprinting = Input.is_action_pressed("sprint") and not is_on_wall()
+
+func _update_footsteps() -> void:
+	if can_play_footsteps and is_on_floor() and active_state == STATE.FLOOR and abs(velocity.x) > 0:
+		if not footstep_audio.playing:
 			footstep_audio.play()
 	else:
 		if footstep_audio.playing:
 			footstep_audio.stop()
-	is_sprinting = Input.is_action_pressed("sprint") and not is_on_wall()
 
 func set_facing_direction(direction: float) -> void:
 	if direction != 0:
 		facing_direction = direction
+		animated_sprite.flip_h = facing_direction < 0
 		ledge_climb_ray_cast.position.x = direction * abs(ledge_climb_ray_cast.position.x)
 		ledge_climb_ray_cast.target_position.x = direction * abs(ledge_climb_ray_cast.target_position.x)
 		ledge_climb_ray_cast.force_raycast_update()
@@ -241,6 +228,24 @@ func set_facing_direction(direction: float) -> void:
 		wall_slide_ray_cast.target_position.x = direction * abs(wall_slide_ray_cast.target_position.x)
 		wall_slide_ray_cast.force_raycast_update()
 
+func _process(delta: float) -> void:
+	if gun_locked or in_dialogue:
+		return
+
+	if is_equipping_gun:
+		var mouse_global_pos = get_global_mouse_position()
+		var flip = mouse_global_pos.x < global_position.x
+		animated_sprite.flip_h = flip
+		gun.position.x = abs(gun.position.x) * (-1 if flip else 1)
+		gun.rotation_degrees = 180 if flip else 0
+	elif is_gun_equipped:
+		var mouse_global_pos = get_global_mouse_position()
+		var flip = mouse_global_pos.x < global_position.x
+		animated_sprite.flip_h = flip
+		gun.position.x = abs(gun.position.x) * (-1 if flip else 1)
+		gun.rotation_degrees = 180 if flip else 0
+	else:
+		animated_sprite.flip_h = facing_direction < 0
 func toggle_gun():
 	if in_dialogue or gun_locked or not gun_unlocked:
 		return
@@ -285,35 +290,6 @@ func _on_slide_lock_end():
 
 func can_player_shoot() -> bool:
 	return is_gun_equipped and not gun_locked and active_state not in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FLOAT]
-
-func _process(delta: float) -> void:
-	if gun_locked:
-		if gun:
-			gun.visible = false
-		is_gun_equipped = false
-		return
-	if is_equipping_gun:
-		var mouse_global_pos = get_global_mouse_position()
-		var flip = mouse_global_pos.x < global_position.x
-		animated_sprite.flip_h = flip
-		gun.position.x = abs(gun.position.x) * (-1 if flip else 1)
-		gun.rotation_degrees = 180 if flip else 0
-		return
-	if is_gun_equipped:
-		animated_sprite.flip_h = facing_direction < 0
-		var flip = facing_direction < 0
-		gun.position.x = abs(gun.position.x) * (-1 if flip else 1)
-		gun.rotation_degrees = 180 if flip else 0
-	else:
-		animated_sprite.flip_h = facing_direction < 0
-	if gun:
-		var restricted := active_state in [STATE.WALL_SLIDE, STATE.LEDGE_CLIMB, STATE.LEDGE_JUMP, STATE.WALL_CLIMB, STATE.FLOAT]
-		if restricted and is_gun_equipped:
-			was_gun_equipped_before_restricted = true
-			unequip_gun()
-		elif was_gun_equipped_before_restricted:
-			equip_gun()
-			was_gun_equipped_before_restricted = false
 
 func _input(event):
 	if in_dialogue or gun_locked or not gun_unlocked:

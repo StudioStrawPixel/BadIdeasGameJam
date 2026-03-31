@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bimrbusqh5ikp"]
+[gd_scene load_steps=49 format=3 uid="uid://bimrbusqh5ikp"]
 
 [ext_resource type="Script" uid="uid://dthqi30nrjgmm" path="res://assets/scripts/player/Player.gd" id="1_70ait"]
 [ext_resource type="Texture2D" uid="uid://cmj56rlyr3thu" path="res://assets/art/2d/Glorp/shooting.png" id="4_ykswe"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bu0ghwnvhmjqp" path="res://assets/art/2d/Glorp/glorp jump2.png" id="7_tsyrq"]
 [ext_resource type="Texture2D" uid="uid://b3oqepg6m15t1" path="res://assets/art/2d/Glorp/walking3.png" id="8_aacko"]
 [ext_resource type="AudioStream" uid="uid://q2csx1m0ynyb" path="res://assets/sounds/grasswalk2.mp3" id="11_d6hj2"]
+[ext_resource type="PackedScene" uid="uid://dvbetmx2ofqxg" path="res://assets/scenes/scorepopup.tscn" id="12_rs4ms"]
 [ext_resource type="PackedScene" uid="uid://c63rxw4ual61p" path="res://assets/scenes/gun.tscn" id="12_ykswe"]
 [ext_resource type="Texture2D" uid="uid://d3m1cwmgpkn1h" path="res://assets/art/2d/player/stick_figure/sf_dash_pixel.png" id="16_mpdld"]
 [ext_resource type="Texture2D" uid="uid://cnxygdoa0adod" path="res://assets/art/2d/player/stick_figure/sf_wall_climb_pixel.png" id="28_ugyrt"]
@@ -338,7 +339,7 @@ texture_filter = 1
 position = Vector2(12, -249)
 scale = Vector2(0.4259294, 0.44146433)
 sprite_frames = SubResource("SpriteFrames_aowxt")
-animation = &"walk"
+animation = &"unequip"
 autoplay = "idle"
 
 [node name="CameraOffset" type="Node2D" parent="."]
@@ -392,9 +393,13 @@ one_shot = true
 
 [node name="Gun" parent="." instance=ExtResource("12_ykswe")]
 z_index = -1
-position = Vector2(86, -285)
-scale = Vector2(2, 2)
+position = Vector2(135, -270)
+scale = Vector2(0.048123974, 0.051743854)
 
 [node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_d6hj2")
 volume_db = 1.5
+
+[node name="Label" parent="." instance=ExtResource("12_rs4ms")]
+offset_right = 364.99997
+offset_bottom = 460.0

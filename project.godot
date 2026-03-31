@@ -35,7 +35,11 @@ directories/dch_directory={
 "unknown": "res://Dialogue/unknown.dch"
 }
 directories/dtl_directory={
+"birdbox": "res://Dialogue/birdbox.dtl",
+"birdsound": "res://Dialogue/birdsound.dtl",
+"enterfarquid": "res://Dialogue/enterfarquid.dtl",
 "farquidhelp": "res://Dialogue/farquidhelp.dtl",
+"farquidpass": "res://Dialogue/farquidpass.dtl",
 "humanbox": "res://Dialogue/humanbox.dtl",
 "humanendtimeline": "res://Dialogue/humanendtimeline.dtl",
 "left bounds": "res://dialogue timelines/left bounds.dtl",
@@ -43,6 +47,7 @@ directories/dtl_directory={
 "monetflower": "res://Dialogue/monetflower.dtl",
 "monetno": "res://Dialogue/monetno.dtl",
 "nopass": "res://Dialogue/nopass.dtl",
+"notenough": "res://Dialogue/notenough.dtl",
 "notyet": "res://Dialogue/notyet.dtl",
 "startgame": "res://dialogue timelines/startgame.dtl",
 "startgame2": "res://Dialogue/startgame2.dtl",

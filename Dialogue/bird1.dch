@@ -2,7 +2,7 @@
 "@path": "res://addons/dialogic/Resources/character.gd",
 "@subpath": NodePath(""),
 &"_translation_id": "",
-&"color": Color(0.38047373, 0.20957947, 0.80078125, 1),
+&"color": Color(0.91796875, 0.56655884, 0.72304606, 1),
 &"custom_info": {
 "prefix": "",
 "sound_mood_default": "",
@@ -23,7 +23,7 @@
 },
 &"default_portrait": "",
 &"description": "",
-&"display_name": "Bird 1",
+&"display_name": "Birdie",
 &"mirror": false,
 &"nicknames": [""],
 &"offset": Vector2(0, 0),

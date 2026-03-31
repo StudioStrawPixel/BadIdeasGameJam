@@ -1,0 +1,606 @@
+[gd_scene load_steps=38 format=3 uid="uid://byd4yxf3hdmqb"]
+
+[ext_resource type="Script" uid="uid://cti37752c5lgi" path="res://assets/scenes/levels/birds.gd" id="1_5bcl7"]
+[ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="1_58cn0"]
+[ext_resource type="FontFile" uid="uid://gvqtctjayc2a" path="res://assets/art/2d/text boxes/Yabikoma-e9W16.otf" id="2_eg8l5"]
+[ext_resource type="Script" uid="uid://do4au2s7jve5e" path="res://assets/scenes/levels/FlowerLabel.gd" id="3_5bcl7"]
+[ext_resource type="Texture2D" uid="uid://4w33uel427s3" path="res://assets/art/Background and Decor/simple_terrain.png" id="4_n12ow"]
+[ext_resource type="Texture2D" uid="uid://b7ae4ydepc12s" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Sky.png" id="5_ehnsn"]
+[ext_resource type="Texture2D" uid="uid://baromlk17y8mv" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/BG_Decor.png" id="6_gref4"]
+[ext_resource type="Texture2D" uid="uid://cf10cq51yhawg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Middle_Decor.png" id="7_5f883"]
+[ext_resource type="Texture2D" uid="uid://bx5g6piqvtyvg" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Foreground.png" id="8_m1x67"]
+[ext_resource type="Texture2D" uid="uid://d2lrxnllkegob" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_tree2.png" id="9_aoqfu"]
+[ext_resource type="Texture2D" uid="uid://dbjqdq02j6804" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_tree3.png" id="10_gj1jy"]
+[ext_resource type="Texture2D" uid="uid://dcaf1j5k4ywra" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_top2.png" id="11_euty8"]
+[ext_resource type="Texture2D" uid="uid://djhg1ab3h40w6" path="res://assets/art/Background and Decor/Fantasy Forest 1/bg_top4.png" id="12_05q35"]
+[ext_resource type="Texture2D" uid="uid://sie32ehhcdse" path="res://assets/art/Background and Decor/forest ground.png" id="13_uu5md"]
+[ext_resource type="Texture2D" uid="uid://u6txcmo7hcvx" path="res://assets/art/Background and Decor/Cartoon_Forest_BG_01/Layers/Ground.png" id="14_dxumy"]
+[ext_resource type="PackedScene" uid="uid://7n8oulgl1q1h" path="res://assets/scenes/left_boundry.tscn" id="15_rxh4o"]
+[ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="16_npxlm"]
+[ext_resource type="Script" uid="uid://cotwbkdn5vhdd" path="res://assets/scenes/levels/camera_limits.gd" id="17_ihop5"]
+[ext_resource type="Script" uid="uid://c4b0eep13usm3" path="res://assets/scenes/levels/box_count.gd" id="18_wcp1w"]
+[ext_resource type="PackedScene" uid="uid://cvnkp5focks7l" path="res://assets/scenes/box.tscn" id="19_nbbfc"]
+[ext_resource type="Texture2D" uid="uid://vonmt7s3cvve" path="res://assets/art/characters/birdie2.png" id="20_eg8l5"]
+[ext_resource type="AudioStream" uid="uid://0c8ydwl34b8s" path="res://assets/sounds/Castle Song.mp3" id="22_n12ow"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2dsga"]
+texture = ExtResource("4_n12ow")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_j0dtf"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_2dsga")
+
+[sub_resource type="Animation" id="Animation_eg8l5"]
+resource_name = "bird_fly_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bird/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"fly", &"fly"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bird/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.25, 0.38, 0.52, 0.58666664, 0.77, 0.9, 1, 1.0666667, 1.25, 1.38, 1.5333334, 1.6000001, 1.8, 2.01),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bird/AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.2333333, 2.8333333, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2071, -286), Vector2(-533, -312), Vector2(-658, 332.00003), Vector2(653, -303)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("bird/AnimatedSprite2D:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.39),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("bird/AnimatedSprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.41),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.251)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("bird/AnimatedSprite2D:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.4666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"chirp"]
+}
+
+[sub_resource type="Animation" id="Animation_5bcl7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bird/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fly"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bird/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bird/AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(653, -303)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("bird/AnimatedSprite2D:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("bird/AnimatedSprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.251)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("bird/AnimatedSprite2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_n12ow"]
+resource_name = "bird_fly_out"
+
+[sub_resource type="Animation" id="Animation_ehnsn"]
+resource_name = "bird_fly_out2"
+length = 2.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bird/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"fly", &"fly"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bird/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.25, 0.38, 0.52, 0.58666664, 0.77, 0.9, 1, 1.0666667, 1.25, 1.38, 1.5333334, 1.6000001, 1.8, 2.01),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bird/AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.03333333, 0.36666667, 2.1666667, 2.73, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-658, 332.00003), Vector2(-533, -312), Vector2(2071, -286), Vector2(7281, 326), Vector2(653, -303)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("bird/AnimatedSprite2D:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.06666666, 2.5, 2.67),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("bird/AnimatedSprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.41),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.251)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("bird/AnimatedSprite2D:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.4666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"chirp"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = false
+tracks/6/path = NodePath("bird/AnimatedSprite2D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n12ow"]
+_data = {
+&"RESET": SubResource("Animation_5bcl7"),
+&"bird_fly_in": SubResource("Animation_eg8l5"),
+&"bird_fly_out": SubResource("Animation_n12ow"),
+&"bird_fly_out2": SubResource("Animation_ehnsn")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bcl7"]
+atlas = ExtResource("20_eg8l5")
+region = Rect2(0, 1079, 988, 1079)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n12ow"]
+atlas = ExtResource("20_eg8l5")
+region = Rect2(988, 1079, 988, 1079)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehnsn"]
+atlas = ExtResource("20_eg8l5")
+region = Rect2(1016, 0, 760, 1088)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gref4"]
+atlas = ExtResource("20_eg8l5")
+region = Rect2(1776, 0, 760, 1088)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5f883"]
+atlas = ExtResource("20_eg8l5")
+region = Rect2(2536, 0, 760, 1088)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1x67"]
+atlas = ExtResource("20_eg8l5")
+region = Rect2(0, 0, 998, 1184)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aoqfu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bcl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n12ow")
+}],
+"loop": true,
+"name": &"chirp",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehnsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gref4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5f883")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gref4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehnsn")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 13.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1x67")
+}],
+"loop": true,
+"name": &"stand",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n12ow"]
+size = Vector2(1574, 2060)
+
+[node name="Birds" type="Node2D"]
+script = ExtResource("1_5bcl7")
+
+[node name="Player" parent="." instance=ExtResource("1_58cn0")]
+z_index = 1
+position = Vector2(-1430, 416)
+
+[node name="FlowerLabel" type="Label" parent="Player"]
+z_index = 100
+offset_left = -329.0
+offset_top = -753.0
+offset_right = 355.0
+offset_bottom = -450.0
+theme_override_colors/font_color = Color(0.42360014, 0.65593845, 0.4980302, 1)
+theme_override_colors/font_outline_color = Color(0.23190331, 0.37692067, 0.2597406, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("2_eg8l5")
+theme_override_font_sizes/font_size = 100
+script = ExtResource("3_5bcl7")
+
+[node name="bubble" type="Marker2D" parent="Player"]
+position = Vector2(77, -459)
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(10, 10)
+tile_set = SubResource("TileSet_j0dtf")
+format = 2
+layer_0/tile_data = PackedInt32Array(262142, 131072, 0, 262143, 131072, 0, 196608, 131072, 0, 262141, 131072, 0, 262140, 131072, 0, 262139, 131072, 0, 262138, 131072, 0, 262137, 131072, 0, 262136, 131072, 0, 262135, 131072, 0, 262134, 131072, 0, 262133, 131072, 0, 196609, 131072, 0, 196610, 131072, 0, 196611, 131072, 0, 196612, 131072, 0, 196613, 131072, 0, 196614, 131072, 0, 196615, 131072, 0, 196617, 131072, 0, 196616, 131072, 0, 196618, 131072, 0, 196619, 131072, 0, 196620, 131072, 0, 262132, 131072, 0, 262131, 131072, 0, 196621, 131072, 0, 196622, 131072, 0, 196623, 131072, 0, 196624, 131072, 0, 196625, 131072, 0, 196626, 131072, 0, 196627, 131072, 0, 196628, 131072, 0, 196629, 131072, 0, 196630, 131072, 0, 196631, 131072, 0, 262130, 131072, 0, 196594, 131072, 0, 131058, 131072, 0, 65522, 131072, 0, -14, 131072, 0, -65550, 131072, 0, -131086, 131072, 0, -196622, 131072, 0, 196632, 131072, 0, 196634, 131072, 0, 196633, 131072, 0, 196635, 131072, 0, 196636, 131072, 0, 196637, 131072, 0, 196638, 131072, 0, 196639, 131072, 0, 196640, 131072, 0, 196641, 131072, 0, 196642, 131072, 0, 196643, 131072, 0, 196644, 131072, 0, 196645, 131072, 0, 196646, 131072, 0, 196647, 131072, 0, 196648, 131072, 0, 196649, 131072, 0, 196650, 131072, 0, 196651, 131072, 0, 196652, 131072, 0, 196653, 131072, 0, 196654, 131072, 0, 196655, 131072, 0, 196656, 131072, 0, 196657, 131072, 0, 196658, 131072, 0, 196659, 131072, 0, 196660, 131072, 0, 196661, 131072, 0, 196662, 131072, 0, 196663, 131072, 0, 196664, 131072, 0, 196665, 131072, 0, 196666, 131072, 0, 196667, 131072, 0, 196668, 131072, 0, 196669, 131072, 0, 131133, 131072, 0, 65597, 131072, 0, 61, 131072, 0, -65475, 131072, 0, -131011, 131072, 0, -196547, 131072, 0, -262083, 131072, 0, -327619, 131072, 0, -393155, 131072, 0)
+
+[node name="BackgroundDecor" type="Node2D" parent="."]
+
+[node name="-3" type="Node2D" parent="BackgroundDecor"]
+z_index = -30
+position = Vector2(-1302, -7)
+
+[node name="Parallax2D" type="Parallax2D" parent="BackgroundDecor/-3"]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("5_ehnsn")
+centered = false
+
+[node name="Parallax2D2" type="Parallax2D" parent="BackgroundDecor/-3"]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D2"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("6_gref4")
+centered = false
+
+[node name="Parallax2D3" type="Parallax2D" parent="BackgroundDecor/-3"]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D3"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("7_5f883")
+centered = false
+
+[node name="Parallax2D4" type="Parallax2D" parent="BackgroundDecor/-3"]
+repeat_size = Vector2(3800, 0)
+repeat_times = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundDecor/-3/Parallax2D4"]
+position = Vector2(-2518, -1528)
+scale = Vector2(2, 2)
+texture = ExtResource("8_m1x67")
+centered = false
+
+[node name="-2" type="Node2D" parent="BackgroundDecor"]
+visible = false
+z_index = -20
+
+[node name="BgTree2" type="Sprite2D" parent="BackgroundDecor/-2"]
+position = Vector2(-1170, -249.99995)
+scale = Vector2(2.4442508, 1.95)
+texture = ExtResource("9_aoqfu")
+
+[node name="BgTree3" type="Sprite2D" parent="BackgroundDecor/-2"]
+position = Vector2(-383, -279)
+scale = Vector2(2.3566177, 3.4139464)
+texture = ExtResource("10_gj1jy")
+
+[node name="BgTop2" type="Sprite2D" parent="BackgroundDecor/-2"]
+position = Vector2(-297, -619)
+scale = Vector2(3.3702066, 2.7061403)
+texture = ExtResource("11_euty8")
+
+[node name="BgTop4" type="Sprite2D" parent="BackgroundDecor/-2"]
+position = Vector2(-1212.0001, -680)
+scale = Vector2(3.116883, 2.6584907)
+texture = ExtResource("12_05q35")
+
+[node name="-1" type="Node2D" parent="BackgroundDecor"]
+z_index = -10
+
+[node name="0" type="Node2D" parent="BackgroundDecor"]
+
+[node name="1" type="Node2D" parent="BackgroundDecor"]
+z_index = 10
+
+[node name="2" type="Node2D" parent="BackgroundDecor"]
+z_index = 20
+
+[node name="ForestGround" type="Sprite2D" parent="BackgroundDecor/2"]
+position = Vector2(3766, 124.99999)
+scale = Vector2(3.3316405, 1)
+texture = ExtResource("13_uu5md")
+
+[node name="3" type="Node2D" parent="BackgroundDecor"]
+z_index = 30
+
+[node name="Ground" type="Sprite2D" parent="BackgroundDecor/3"]
+position = Vector2(-1268.0001, 7)
+scale = Vector2(2.9442708, 0.9259259)
+texture = ExtResource("14_dxumy")
+
+[node name="Ground2" type="Sprite2D" parent="BackgroundDecor/3"]
+position = Vector2(3026.0002, -71.99999)
+scale = Vector2(2.6922097, 1.0697154)
+texture = ExtResource("14_dxumy")
+
+[node name="Ground3" type="Sprite2D" parent="BackgroundDecor/3"]
+position = Vector2(8982, -87.999985)
+scale = Vector2(3.5339367, 1.1008916)
+texture = ExtResource("14_dxumy")
+
+[node name="Left Boundry" parent="." instance=ExtResource("15_rxh4o")]
+position = Vector2(-2548, -3272)
+
+[node name="Fade" parent="." instance=ExtResource("16_npxlm")]
+
+[node name="CameraLimits" type="Node2D" parent="."]
+script = ExtResource("17_ihop5")
+left_limit = -2000
+right_limit = 9500
+top_limit = -1500
+bottom_limit = 500
+
+[node name="Boxes" type="Node2D" parent="."]
+script = ExtResource("18_wcp1w")
+
+[node name="Box" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(6078, 378)
+
+[node name="Box2" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(4379, 197)
+
+[node name="Box3" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(1048, 402)
+
+[node name="Box4" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(2916, 312)
+
+[node name="Box5" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(5020, 349)
+
+[node name="Box6" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(2440, 360)
+
+[node name="Box7" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(767, -1036)
+
+[node name="Box8" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(1824, 337)
+
+[node name="Box9" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(3097, 375)
+
+[node name="Box10" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(3088, -617)
+
+[node name="Box11" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(-824, -960)
+
+[node name="Box12" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(461, -867)
+
+[node name="Box13" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(6622, 301)
+
+[node name="Box14" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(1794, -966)
+
+[node name="Box15" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(1986, 200)
+
+[node name="Box16" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(2969, -968)
+
+[node name="Box17" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(3028, 190)
+
+[node name="Box18" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(5605, -918)
+
+[node name="Box19" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(4300, -886)
+
+[node name="Box20" parent="Boxes" instance=ExtResource("19_nbbfc")]
+position = Vector2(4377, 347)
+
+[node name="bird" type="CharacterBody2D" parent="."]
+position = Vector2(881, 11)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bird"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_n12ow")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bird"]
+position = Vector2(653, -303)
+scale = Vector2(0.2, 0.251)
+sprite_frames = SubResource("SpriteFrames_aoqfu")
+animation = &"fly"
+autoplay = "chirp"
+
+[node name="birdbubble" type="Marker2D" parent="bird"]
+position = Vector2(-689, 152)
+
+[node name="birdbubble2" type="Marker2D" parent="bird"]
+position = Vector2(7193, 96)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-1353, -43)
+stream = ExtResource("22_n12ow")
+volume_db = -15.0
+max_distance = 10000.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(9889, -447)
+shape = SubResource("RectangleShape2D_n12ow")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
