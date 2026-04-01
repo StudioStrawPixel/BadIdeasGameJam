@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://wr6bbyp62ixv"]
+
+[ext_resource type="Script" uid="uid://boe74o6d7akb1" path="res://ending_scene.gd" id="1_1jnvm"]
+[ext_resource type="VideoStream" uid="uid://2b6fhqyqu5cx" path="res://assets/art/anims/finalanimFINISH (1).ogv" id="1_ayyxh"]
+[ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="2_1jnvm"]
+[ext_resource type="FontFile" uid="uid://7fmgxrcuswm6" path="res://assets/art/2d/text boxes/HugMeTight-GzZq.ttf" id="3_rfeu3"]
+
+[node name="EndingScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1jnvm")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1243.0
+offset_bottom = 676.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_ayyxh")
+autoplay = true
+expand = true
+
+[node name="Fade" parent="." instance=ExtResource("2_1jnvm")]
+visible = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1114.0
+offset_top = 629.0
+offset_right = 1211.0
+offset_bottom = 685.0
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 9.0
+offset_right = 78.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("3_rfeu3")
+theme_override_font_sizes/font_size = 30
+text = "Skip"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

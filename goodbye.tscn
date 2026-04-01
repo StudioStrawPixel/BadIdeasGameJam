@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=3 uid="uid://cys5xl60umqq8"]
+
+[ext_resource type="Script" uid="uid://c8r4q8dqytpe2" path="res://goodbye.gd" id="1_4n3sx"]
+[ext_resource type="Texture2D" uid="uid://btmhmbdqx20mq" path="res://assets/art/Background and Decor/closebox.png" id="1_emj7c"]
+[ext_resource type="Texture2D" uid="uid://b3oqepg6m15t1" path="res://assets/art/2d/Glorp/walking3.png" id="2_diu1r"]
+[ext_resource type="PackedScene" uid="uid://2yabcneqsuro" path="res://assets/scenes/fade.tscn" id="4_cmcde"]
+[ext_resource type="AudioStream" uid="uid://xkk3xyh1t13d" path="res://assets/sounds/birdambience.mp3" id="5_cmcde"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0fyr"]
+atlas = ExtResource("2_diu1r")
+region = Rect2(0, 0, 767, 1091)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4n3sx"]
+atlas = ExtResource("2_diu1r")
+region = Rect2(767, 0, 767, 1091)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cmcde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0fyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n3sx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_jilga"]
+resource_name = "enter"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.17, 0.36666667, 0.5366667, 0.73333335, 0.90333337, 1.1333334, 1.3033334, 1.5000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.69),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-2113, 479.99997), Vector2(-896.00006, 520)]
+}
+
+[sub_resource type="Animation" id="Animation_lo6kp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2113, 479.99997)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o7y8b"]
+_data = {
+&"RESET": SubResource("Animation_lo6kp"),
+&"enter": SubResource("Animation_jilga")
+}
+
+[node name="Goodbye" type="Node2D"]
+script = ExtResource("1_4n3sx")
+
+[node name="Closebox" type="Sprite2D" parent="."]
+z_index = -20
+position = Vector2(111, 39)
+texture = ExtResource("1_emj7c")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(67, 15)
+zoom = Vector2(0.35, 0.35)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+position = Vector2(-2113, 479.99997)
+scale = Vector2(0.91199476, 0.8831347)
+sprite_frames = SubResource("SpriteFrames_cmcde")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_o7y8b")
+}
+
+[node name="Fade" parent="." instance=ExtResource("4_cmcde")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_cmcde")
+volume_db = -5.0
+autoplay = true

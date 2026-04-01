@@ -113,6 +113,6 @@ func _on_exit_body_entered(body: Node2D) -> void:
 		return
 
 	if family_dialogue_done and helpfamily_started and finale_done:
-		get_tree().change_scene_to_file("res://assets/scenes/main_menu.tscn")
+		get_tree().change_scene_to_file("res://finale.tscn")
 	else:
 		await play_player_dialogue("monetno")

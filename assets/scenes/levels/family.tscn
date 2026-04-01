@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dblk4mex0t3yx"]
+[gd_scene load_steps=32 format=3 uid="uid://dblk4mex0t3yx"]
 
 [ext_resource type="Script" uid="uid://b3juxyuljc7jk" path="res://assets/scenes/levels/family.gd" id="1_3kxuh"]
 [ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="1_10m85"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://b5bp2wlmboyy6" path="res://assets/art/characters/baba.png" id="20_ttija"]
 [ext_resource type="Texture2D" uid="uid://ccup3n67xaens" path="res://assets/art/Background and Decor/trashnbox.png" id="21_3iyqx"]
 [ext_resource type="Texture2D" uid="uid://bmiq25xqefmeb" path="res://assets/art/Background and Decor/tire.png" id="22_062m2"]
+[ext_resource type="AudioStream" uid="uid://c0kimmsrevp7i" path="res://assets/sounds/funnymusic.mp3" id="25_shw13"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w3qrs"]
 texture = ExtResource("4_shw13")
@@ -266,6 +267,9 @@ shape = SubResource("RectangleShape2D_shw13")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(6388, -233)
+stream = ExtResource("25_shw13")
+volume_db = -8.0
+max_distance = 15000.0
 
 [node name="cutscene" type="Area2D" parent="."]
 
