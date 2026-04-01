@@ -87,6 +87,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if in_dialogue or is_equipping_gun or is_slide_locked:
+		footstep_audio.stop()
 		velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
 		if not in_dialogue:
 			velocity.x = 0
@@ -210,13 +211,17 @@ func handle_sprint(delta: float) -> void:
 	is_sprinting = Input.is_action_pressed("sprint") and not is_on_wall()
 
 func _update_footsteps() -> void:
+	if in_dialogue:
+		if footstep_audio.playing:
+			footstep_audio.stop()
+		return
+
 	if can_play_footsteps and is_on_floor() and active_state == STATE.FLOOR and abs(velocity.x) > 0:
 		if not footstep_audio.playing:
 			footstep_audio.play()
 	else:
 		if footstep_audio.playing:
 			footstep_audio.stop()
-
 func set_facing_direction(direction: float) -> void:
 	if direction != 0:
 		facing_direction = direction

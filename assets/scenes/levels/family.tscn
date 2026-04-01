@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dblk4mex0t3yx"]
+[gd_scene load_steps=31 format=3 uid="uid://dblk4mex0t3yx"]
 
 [ext_resource type="Script" uid="uid://b3juxyuljc7jk" path="res://assets/scenes/levels/family.gd" id="1_3kxuh"]
 [ext_resource type="PackedScene" uid="uid://bimrbusqh5ikp" path="res://assets/scenes/glorp.tscn" id="1_10m85"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://cotwbkdn5vhdd" path="res://assets/scenes/levels/camera_limits.gd" id="17_oaqif"]
 [ext_resource type="Script" uid="uid://c4b0eep13usm3" path="res://assets/scenes/levels/box_count.gd" id="18_fhla4"]
 [ext_resource type="Texture2D" uid="uid://bfra8ml0gy0cy" path="res://assets/art/characters/mamas.png" id="19_pvp0e"]
+[ext_resource type="PackedScene" uid="uid://cvnkp5focks7l" path="res://assets/scenes/box.tscn" id="20_ga2lu"]
 [ext_resource type="Texture2D" uid="uid://b5bp2wlmboyy6" path="res://assets/art/characters/baba.png" id="20_ttija"]
 [ext_resource type="Texture2D" uid="uid://ccup3n67xaens" path="res://assets/art/Background and Decor/trashnbox.png" id="21_3iyqx"]
 [ext_resource type="Texture2D" uid="uid://bmiq25xqefmeb" path="res://assets/art/Background and Decor/tire.png" id="22_062m2"]
@@ -43,7 +44,13 @@ sources/0 = SubResource("TileSetAtlasSource_w3qrs")
 size = Vector2(1042.625, 621.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shw13"]
-size = Vector2(591, 670.5)
+size = Vector2(439.5, 515.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3kxuh"]
+size = Vector2(359.5, 2314)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3wtw"]
+size = Vector2(1803, 2531)
 
 [node name="Family" type="Node2D"]
 script = ExtResource("1_3kxuh")
@@ -186,7 +193,6 @@ texture = ExtResource("14_hdygn")
 position = Vector2(-2548, -3272)
 
 [node name="Fade" parent="." instance=ExtResource("16_1g7wy")]
-visible = false
 
 [node name="CameraLimits" type="Node2D" parent="."]
 script = ExtResource("17_oaqif")
@@ -198,19 +204,37 @@ bottom_limit = 500
 [node name="Boxes" type="Node2D" parent="."]
 script = ExtResource("18_fhla4")
 
+[node name="Box" parent="Boxes" instance=ExtResource("20_ga2lu")]
+position = Vector2(-415, 332)
+
+[node name="Box2" parent="Boxes" instance=ExtResource("20_ga2lu")]
+position = Vector2(855, 332)
+
+[node name="Box3" parent="Boxes" instance=ExtResource("20_ga2lu")]
+position = Vector2(3028, -970)
+
+[node name="Box4" parent="Boxes" instance=ExtResource("20_ga2lu")]
+position = Vector2(2425, 324)
+
+[node name="Box5" parent="Boxes" instance=ExtResource("20_ga2lu")]
+position = Vector2(4241, 356)
+
 [node name="mama" type="Area2D" parent="."]
 
 [node name="Mamas" type="Sprite2D" parent="mama"]
-position = Vector2(6746, 224)
+position = Vector2(6900, 289.5)
+scale = Vector2(0.71794873, 0.8038922)
 texture = ExtResource("19_pvp0e")
 
 [node name="mamabubble" type="Marker2D" parent="mama"]
+position = Vector2(6701, 25)
 
 [node name="baba" type="Area2D" parent="."]
 
 [node name="Baba" type="Sprite2D" parent="baba"]
 z_index = -1
-position = Vector2(7535, 260)
+position = Vector2(7609, 324)
+scale = Vector2(0.73188406, 0.7557252)
 texture = ExtResource("20_ttija")
 
 [node name="bababubble" type="Marker2D" parent="baba"]
@@ -232,12 +256,28 @@ collision_layer = 2
 
 [node name="Tire" type="Sprite2D" parent="drums"]
 z_index = -2
-position = Vector2(5805.0005, 45.99997)
-scale = Vector2(0.70348835, 0.6350711)
+position = Vector2(6421, 253.00003)
+scale = Vector2(0.5537802, 0.5165876)
 texture = ExtResource("22_062m2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="drums"]
-position = Vector2(5882, 128)
+position = Vector2(6382, 206)
 shape = SubResource("RectangleShape2D_shw13")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(6388, -233)
+
+[node name="cutscene" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cutscene"]
+position = Vector2(6644, -630)
+shape = SubResource("RectangleShape2D_3kxuh")
+
+[node name="exit" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit"]
+position = Vector2(10045, -503)
+shape = SubResource("RectangleShape2D_b3wtw")
+
+[connection signal="body_entered" from="cutscene" to="." method="_on_cutscene_body_entered"]
+[connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]

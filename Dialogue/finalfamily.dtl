@@ -1,0 +1,32 @@
+raccoonmama: [mood=yes] WOW! That was...
+raccoonmama: [mood=yes] A W E S O M E !
+raccoonmama: [mood=yes] Hun I outta kiss you on your cheek! I don't know how I could ever repay you
+glorb: [mood=yes] Can you help me find my brother?
+raccoonmama: [mood=yes] Why yes of course! Where do you think he is?
+glorb: [mood=yes] I was trapped in a box and escaped, I feel like he may be in one too
+raccoonmama: [mood=yes] Oh no. . . That mean he could be in that big ol' nasty warehouse just past us here. . .
+audio "res://assets/sounds/shock.mp3" [volume="-5.0"]
+glorb: !!!
+glorb: [mood=yes] I must be getting close!
+raccoonmama: [mood=yes] You are, but it isn't safe round those parts hun.
+glorb: [mood=yes] I have to save him, he is my bestfriend . . .
+raccoonmama: . . .
+raccoonmama: [mood=yes] I made up my mind!
+raccoonmama: [mood=yes] I know how I am going to repay you.
+raccoonmama: [mood=yes] I am gunna rally the troops and we are getting you
+audio "res://assets/sounds/boom.mp3" [volume="-10.0"]
+raccoonmama: [font_size=30] [color=RED] IN  [/color] [/font_size]
+audio "res://assets/sounds/boom.mp3" [volume="-10.0" bus=""]
+raccoonmama: [font_size=30] [color=RED] THAT  [/color] [/font_size]
+audio "res://assets/sounds/boom.mp3" [volume="0.0"]
+raccoonmama: [font_size=30] [color=RED] WAREHOUSE!  [/color] [/font_size]
+raccoonmama: [mood=yes] I am going to get my friends of the forest and we are going to cause a comotion!
+raccoonmama: [mood=yes] That way you can sneak in and get your brother !
+glorb: [mood=yes] Really, you would do that for me?
+raccoonmama: [mood=yes] Why of course hun!
+raccoonmama: [mood=yes] Besides. . .
+raccoonmama: [mood=yes] It is about time we show that manufacturing plant a piece of our mind!
+raccoonmama: . . .
+raccoonmama: [mood=yes] Head on over to the edge of the forest to the right there and I will meet you with backup!
+glorb: [mood=yes] Thank you!
+[end_timeline]
