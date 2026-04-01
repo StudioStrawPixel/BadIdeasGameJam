@@ -53,7 +53,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		layout.register_character(load("res://Dialogue/bird1.dch"), birdbubble_2)
 		layout.register_character(load("res://Dialogue/glorb.dch"), bubble)
 		await Dialogic.timeline_ended
-		player.end_dialogue()
+		
 
 		var sound := preload("res://assets/sounds/birdsound.mp3")
 		music_player.stream = sound
@@ -73,6 +73,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		goodbye.register_character(load("res://Dialogue/bird1.dch"), birdbubble_2)
 		goodbye.register_character(load("res://Dialogue/glorb.dch"), bubble)
 		await Dialogic.timeline_ended
+		player.end_dialogue()
 
 		await get_tree().create_timer(1.0).timeout
 		await fade_layer.fade(1.0, 1.5).finished
